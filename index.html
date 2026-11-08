@@ -66,7 +66,6 @@
   .np-title span { font-size:1rem; opacity:.75; }
   .np-frame { position:relative; width:100%; aspect-ratio:16/9; min-height:200px; border-radius:10px; overflow:hidden;
               background:#000; border:3px solid #c9973f; }
-  .np-frame iframe, .np-frame > div { position:absolute; inset:0; width:100%; height:100%; border:0; }
 
   #letter { display:none; margin:28px auto 0; max-width:720px; padding:30px 26px 26px; border-radius:22px;
             background:linear-gradient(180deg,rgba(255,236,200,.10),rgba(255,236,200,.04));
@@ -374,13 +373,9 @@
     <button class="btn ghost" id="playBtn">▶ Play music</button>
     <button class="btn ghost" id="replayBtn" hidden>↺ Watch again</button>
   </div>
-  <section id="np" aria-label="Now playing">
-    <div class="np-inner">
-      <div class="np-label"><span class="np-dot pulse"></span>Now playing on the gramophone</div>
-      <div class="np-title">Magale <span>· Sai Abhyankkar &amp; Harini</span></div>
-      <div class="np-frame"><div id="ytPlayer"></div></div>
-    </div>
-  </section>
+  <audio id="songAudio" preload="none">
+    <source src="Magale%20Baththa%20320%20Kbps.mp3" type="audio/mpeg">
+  </audio>
 
   <section id="letter">
     <h2>Happy Diwali, <span id="nameL">Abhiii</span> 🪔</h2>
@@ -410,8 +405,6 @@ I hope you find yours too.
 You deserve every bit of light this Diwali brings —
 calm days, silly laughter, and everything your heart is quietly hoping for.`;
 const DANCE_SECONDS = 30;      // how long she dances before walking to the door
-const YOUTUBE_URL = "https://www.youtube.com/watch?v=FhhA5purigQ";  // official "Magale" music video (Think Music India)
-const SONG_START = 0;          // seconds into the video to start from, e.g. 20 to skip an intro
 /* ==================================================== */
 
 const $ = id => document.getElementById(id);
@@ -891,14 +884,8 @@ function narrate(txt) {
   capTimer = setTimeout(() => { c.textContent = txt; c.classList.remove("hide"); }, 380);
 }
 
-/* ---------- Music: the official video on YouTube; a gentle tune if YouTube can't load ---------- */
-const npBox = $("np");
-function ytIdFrom(u) {
-  const m = String(u).match(/(?:youtu\.be\/|[?&]v=|\/embed\/|\/shorts\/|\/live\/)([\w-]{11})/);
-  return m ? m[1] : (/^[\w-]{11}$/.test(u) ? u : null);
-}
-const YT_ID = ytIdFrom(YOUTUBE_URL);
-let yt = null, ytReady = false, ytFailed = !YT_ID, wantPlay = false, ytEnded = false, watchdog = null;
+/* ---------- Music ---------- */
+const songAudio = $("songAudio");
 
 function setPlaying(v) { playing = v; if (v) everPlayed = true; updatePlayBtn(); }
 function updatePlayBtn() { $("playBtn").textContent = playing ? "⏸ Pause music" : "▶ Play music"; }
@@ -907,92 +894,39 @@ function startStory(msg) {
   if (state === "sad") { setState("listening"); narrate(msg); }
 }
 
-function synthPlay(msg) {
-  const ok = synthStart();
+songAudio.addEventListener("play", () => {
+  const resumed = everPlayed && state !== "sad";
   setPlaying(true);
-  if (state === "sad") { setState("listening"); }
-  narrate(ok ? (msg || N.playS) : "Sound isn't available here, but the story goes on ✨");
-}
-
-function ytFail(reason) {
-  if (ytFailed) return;
-  if (reason === "timeout" && ytReady) return;
-  ytFailed = true;
-  npBox.classList.remove("show");
-  clearTimeout(watchdog);
-  if (wantPlay) { wantPlay = false; synthPlay("The song couldn't load here, so here's a gentle tune instead ♪"); }
-}
-
-if (YT_ID) {
-  window.onYouTubeIframeAPIReady = () => {
-    try {
-      yt = new YT.Player("ytPlayer", {
-        videoId: YT_ID,
-        playerVars: { start: SONG_START, playsinline: 1, rel: 0, modestbranding: 1 },
-        events: {
-          onReady: () => { ytReady = true; if (wantPlay) ytPlay(); },
-          onStateChange: e => ytState(e.data),
-          onError: () => ytFail("error")
-        }
-      });
-    } catch (err) { ytFail("error"); }
-  };
-  const s = document.createElement("script");
-  s.src = "https://www.youtube.com/iframe_api";
-  s.onerror = () => ytFail("blocked");
-  document.head.appendChild(s);
-  setTimeout(() => ytFail("timeout"), 20000);
-}
-
-function ytPlay() {
-  wantPlay = true;
-  npBox.classList.add("show");
-  if (!ytReady) { narrate("Winding up the gramophone… ♪"); return; }
-  try {
-    if (ytEnded) { yt.seekTo(SONG_START, true); ytEnded = false; }
-    yt.playVideo();
-  } catch (e) { ytFail("error"); return; }
-  clearTimeout(watchdog);
-  // Some phones (mostly iPhones) only start a video when it is tapped directly
-  watchdog = setTimeout(() => {
-    if (wantPlay && !playing) {
-      narrate("Tap ▶ on the little player below to start the song 🎵");
-      npBox.scrollIntoView({ behavior: "smooth", block: "nearest" });
-    }
-  }, 3500);
-}
-
-function ytState(s) {
-  if (s === 1) {                       // playing (from the gramophone or the player's own button)
-    wantPlay = false; clearTimeout(watchdog);
-    npBox.classList.add("show");
-    const resumed = everPlayed && state !== "sad";
-    setPlaying(true);
-    startStory(N.playF);
-    if (resumed && (state === "listening" || state === "dancing")) narrate("The music plays on… ♪");
-  } else if (s === 2) {                // paused
-    if (playing) { setPlaying(false); if (state === "listening" || state === "dancing") narrate(N.paused); }
-  } else if (s === 0) {                // song finished
-    ytEnded = true; setPlaying(false);
-    if (["listening", "rising", "dancing"].includes(state)) { setState("toDoor"); narrate(N.toDoor); }
+  startStory(N.playF);
+  if (resumed && (state === "listening" || state === "dancing")) narrate("The music plays on… ♪");
+});
+songAudio.addEventListener("pause", () => {
+  if (playing) {
+    setPlaying(false);
+    if (state === "listening" || state === "dancing") narrate(N.paused);
   }
-}
+});
+songAudio.addEventListener("ended", () => {
+  setPlaying(false);
+  if (["listening", "rising", "dancing"].includes(state)) { setState("toDoor"); narrate(N.toDoor); }
+});
+songAudio.addEventListener("error", () => {
+  setPlaying(false);
+  narrate("The song couldn't be loaded. Please check the audio file and try again.");
+});
 
 function togglePlay() {
   if (state === "intro") return;
   initAudio();
-  if (playing || wantPlay) { pauseMusic(); return; }
-  if (!ytFailed) ytPlay(); else synthPlay();
+  if (!songAudio.paused) { pauseMusic(); return; }
+  songAudio.play().catch(() => {
+    setPlaying(false);
+    narrate("The song couldn't be played. Please try again.");
+  });
 }
 function pauseMusic() {
-  wantPlay = false; clearTimeout(watchdog);
-  if (!ytFailed && ytReady) {
-    try { yt.pauseVideo(); } catch (e) {}
-    if (!playing) updatePlayBtn();
-  } else {
-    synthStop(); setPlaying(false);
-    if (state === "listening" || state === "dancing") narrate(N.paused);
-  }
+  songAudio.pause();
+  if (!playing) updatePlayBtn();
 }
 $("gramo").addEventListener("click", togglePlay);
 $("playBtn").addEventListener("click", togglePlay);
@@ -1015,7 +949,7 @@ $("openBtn").addEventListener("click", () => {
   initAudio();
   $("intro").classList.add("gone");
   setState("sad"); narrate(N.intro);
-  setTimeout(() => { if (!everPlayed && !wantPlay && state === "sad") narrate(N.hint); }, 5200);
+  setTimeout(() => { if (!everPlayed && state === "sad") narrate(N.hint); }, 5200);
 });
 
 /* ================= Effects ================= */
