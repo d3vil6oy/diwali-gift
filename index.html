@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Diwali ✨</title>
+<meta name="description" content="A little Diwali surprise, made just for you 🪔">
+<meta property="og:type" content="website">
+<meta property="og:title" content="A little Diwali surprise ✨">
+<meta property="og:description" content="Step inside 🪔 (turn your sound on)">
+<!-- For the WhatsApp/Instagram link preview: replace YOUR-USERNAME (and "diwali" if you name the repo differently) -->
+<meta property="og:image" content="https://YOUR-USERNAME.github.io/diwali/preview.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='88'>🪔</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root { --gold:#f4c25b; --cream:#fff4e0; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:radial-gradient(ellipse at top,#2b1745 0%,#140b24 55%,#08040f 100%); color:var(--cream);
+         font-family:Poppins,system-ui,sans-serif; min-height:100vh; }
+  .page { max-width:1120px; margin:0 auto; padding:22px 14px 48px; }
+  header { text-align:center; margin-bottom:14px; }
+  .eyebrow { font-size:.78rem; letter-spacing:.28em; text-transform:uppercase; color:#e9b96a; opacity:.85; }
+  h1 { font-family:"Cormorant Garamond",Georgia,serif; font-weight:600; font-size:clamp(2rem,5.2vw,3.2rem);
+       color:#ffe2a6; text-shadow:0 0 22px rgba(255,190,90,.35); line-height:1.1; margin-top:4px; }
+  h1 span { color:#ff9fbd; }
+
+  #stage { position:relative; width:100%; aspect-ratio:12/7; border-radius:22px; overflow:hidden; background:#0d0717;
+           box-shadow:0 18px 50px rgba(0,0,0,.55), 0 0 0 1px rgba(244,194,91,.25); }
+  @media (max-width:720px) { #stage { aspect-ratio:1/1.08; border-radius:18px; } }
+  #scene { position:absolute; inset:0; width:100%; height:100%; display:block; touch-action:manipulation;
+           -webkit-tap-highlight-color:transparent; }
+
+  #intro { position:absolute; inset:0; z-index:5; display:flex; flex-direction:column; align-items:center; justify-content:center;
+           gap:14px; text-align:center; padding:20px;
+           background:radial-gradient(ellipse at center,rgba(46,22,66,.86),rgba(8,4,15,.96)); transition:opacity 1s; }
+  #intro.gone { opacity:0; pointer-events:none; }
+  #intro .big { font-family:"Cormorant Garamond",Georgia,serif; font-size:clamp(1.8rem,5vw,3rem); color:#ffe2a6; line-height:1.15; }
+  #intro .big span { color:#ff9fbd; }
+  #intro .small { opacity:.7; font-size:.88rem; }
+  .diya-ico { font-size:2.2rem; filter:drop-shadow(0 0 12px rgba(255,180,80,.8)); }
+
+  .btn { font:inherit; font-weight:600; font-size:1rem; border:none; border-radius:999px; padding:13px 28px; cursor:pointer;
+         color:#2a1405; background:linear-gradient(180deg,#ffe29a,#f2b84b); box-shadow:0 8px 24px rgba(242,184,75,.35);
+         transition:transform .15s; }
+  .btn:hover { transform:translateY(-2px); }
+  .btn.ghost { background:transparent; color:#ffe2a6; box-shadow:none; border:1px solid rgba(255,226,166,.45);
+               padding:10px 20px; font-size:.92rem; }
+
+  #caption { text-align:center; font-family:"Cormorant Garamond",Georgia,serif; font-style:italic;
+             font-size:clamp(1.15rem,2.6vw,1.5rem); line-height:1.35; color:#fff1d6; min-height:2.8em;
+             margin:16px auto 0; max-width:760px; transition:opacity .45s; }
+  #caption.hide { opacity:0; }
+
+  .controls { display:flex; flex-wrap:wrap; gap:12px; justify-content:center; align-items:center; margin-top:10px; }
+  #np { max-width:460px; margin:0 auto; max-height:0; overflow:hidden; opacity:0;
+        transition:max-height .9s ease, opacity .9s ease, margin .9s ease; }
+  #np.show { max-height:440px; opacity:1; margin-top:18px; }
+  .np-inner { padding:12px 12px 14px; border-radius:18px; background:linear-gradient(180deg,#3a1f10,#22110a);
+              border:1px solid rgba(244,194,91,.45); box-shadow:0 12px 30px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,220,150,.15); }
+  .np-label { display:flex; align-items:center; justify-content:center; gap:8px; font-size:.7rem; letter-spacing:.2em;
+              text-transform:uppercase; color:#e9b96a; }
+  .np-dot { width:8px; height:8px; border-radius:50%; background:#ff6b6b; box-shadow:0 0 8px #ff6b6b; }
+  .np-title { font-family:"Cormorant Garamond",Georgia,serif; font-size:1.35rem; color:#ffe2a6; text-align:center; margin:2px 0 10px; }
+  .np-title span { font-size:1rem; opacity:.75; }
+  .np-frame { position:relative; width:100%; aspect-ratio:16/9; min-height:200px; border-radius:10px; overflow:hidden;
+              background:#000; border:3px solid #c9973f; }
+  .np-frame iframe, .np-frame > div { position:absolute; inset:0; width:100%; height:100%; border:0; }
+
+  #letter { display:none; margin:28px auto 0; max-width:720px; padding:30px 26px 26px; border-radius:22px;
+            background:linear-gradient(180deg,rgba(255,236,200,.10),rgba(255,236,200,.04));
+            border:1px solid rgba(244,194,91,.4); box-shadow:0 14px 40px rgba(0,0,0,.4); }
+  #letter.show { display:block; animation:rise .9s ease-out; }
+  @keyframes rise { from { opacity:0; transform:translateY(18px); } to { opacity:1; transform:none; } }
+  #letter h2 { font-family:"Cormorant Garamond",Georgia,serif; font-size:2rem; color:#ffe2a6; text-align:center; margin-bottom:12px; }
+  #letterText { font-family:"Cormorant Garamond",Georgia,serif; font-size:1.32rem; line-height:1.65; color:#fff1da;
+                white-space:pre-line; min-height:6em; }
+  #sign { margin-top:16px; text-align:right; font-family:"Cormorant Garamond",Georgia,serif; font-style:italic;
+          font-size:1.25rem; color:var(--gold); opacity:0; transition:opacity 1s; }
+  footer { text-align:center; margin-top:26px; font-size:.78rem; opacity:.4; }
+
+  .pulse { animation:pulse 1.8s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { opacity:.25; } 50% { opacity:.95; } }
+  .clickable { cursor:pointer; }
+</style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <div class="eyebrow">A little Diwali surprise</div>
+    <h1>Happy Diwali, <span id="nameH">Abhiii</span></h1>
+  </header>
+
+  <div id="stage">
+    <svg id="scene" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid meet" role="img"
+         aria-label="An illustrated hall on Diwali night with a gramophone, a girl, and an open door with diyas">
+      <defs>
+        <linearGradient id="gWall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3b2654"/><stop offset="1" stop-color="#2a1a3d"/></linearGradient>
+        <pattern id="pWall" width="60" height="64" patternUnits="userSpaceOnUse">
+          <path d="M30 10 C37 20 37 28 30 34 C23 28 23 20 30 10Z" fill="#4a3266" opacity=".5"/>
+          <circle cx="0" cy="48" r="2" fill="#4a3266" opacity=".6"/><circle cx="60" cy="48" r="2" fill="#4a3266" opacity=".6"/>
+        </pattern>
+        <linearGradient id="gFloor" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a170e"/><stop offset="1" stop-color="#5a361f"/></linearGradient>
+        <linearGradient id="gSky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0a1238"/><stop offset=".62" stop-color="#29205c"/><stop offset="1" stop-color="#c45f3e"/></linearGradient>
+        <linearGradient id="gBrass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fde6a6"/><stop offset=".45" stop-color="#dba845"/><stop offset="1" stop-color="#7c5218"/></linearGradient>
+        <radialGradient id="gHornIn" cx=".6" cy=".5" r=".62"><stop offset="0" stop-color="#2a1806"/><stop offset=".65" stop-color="#7c5218"/><stop offset="1" stop-color="#e8bd62"/></radialGradient>
+        <linearGradient id="gWood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#8a5028"/><stop offset="1" stop-color="#5a2e12"/></linearGradient>
+        <linearGradient id="gCab" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3d1d0c"/><stop offset=".5" stop-color="#64321a"/><stop offset="1" stop-color="#3a1b0a"/></linearGradient>
+        <linearGradient id="gLeafL" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#3a1b0b"/><stop offset="1" stop-color="#6e3a1a"/></linearGradient>
+        <linearGradient id="gLeafR" x1="1" y1="0" x2="0" y2="0"><stop offset="0" stop-color="#3a1b0b"/><stop offset="1" stop-color="#6e3a1a"/></linearGradient>
+        <linearGradient id="gPaint" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffd08a"/><stop offset="1" stop-color="#e0708a"/></linearGradient>
+        <radialGradient id="gGlow"><stop offset="0" stop-color="#ffd27a" stop-opacity=".9"/><stop offset=".4" stop-color="#ffb347" stop-opacity=".35"/><stop offset="1" stop-color="#ff9a3c" stop-opacity="0"/></radialGradient>
+        <radialGradient id="gSpot"><stop offset="0" stop-color="#ffe7b8" stop-opacity=".2"/><stop offset="1" stop-color="#ffe7b8" stop-opacity="0"/></radialGradient>
+        <radialGradient id="gDoorSpill"><stop offset="0" stop-color="#ffb35c" stop-opacity=".5"/><stop offset="1" stop-color="#ffb35c" stop-opacity="0"/></radialGradient>
+        <radialGradient id="gVig" cx=".5" cy=".46" r=".75"><stop offset=".6" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".55"/></radialGradient>
+        <linearGradient id="gSkirt" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#a81a50"/><stop offset="1" stop-color="#e2407a"/></linearGradient>
+        <pattern id="pSkirt" width="14" height="14" patternUnits="userSpaceOnUse"><circle cx="7" cy="7" r="1.3" fill="#ffd36b"/></pattern>
+        <linearGradient id="gPouffe" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0f4f4c"/><stop offset=".5" stop-color="#1f8078"/><stop offset="1" stop-color="#0e4a47"/></linearGradient>
+        <linearGradient id="gClay" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d47a3e"/><stop offset="1" stop-color="#7a3010"/></linearGradient>
+        <radialGradient id="gFlame" cx=".5" cy=".75" r=".65"><stop offset="0" stop-color="#fffbe0"/><stop offset=".45" stop-color="#ffd24a"/><stop offset="1" stop-color="#ff7a1a"/></radialGradient>
+        <clipPath id="clipDoor"><path d="M870 470 L870 250 A80 80 0 0 1 1030 250 L1030 470 Z"/></clipPath>
+        <filter id="fSoft" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3"/></filter>
+      </defs>
+
+      <!-- ===== Wall ===== -->
+      <rect width="1200" height="470" fill="url(#gWall)"/>
+      <rect width="1200" height="470" fill="url(#pWall)"/>
+      <rect width="1200" height="16" fill="#1d1129"/>
+      <rect y="16" width="1200" height="3" fill="#6a4c80" opacity=".5"/>
+      <rect y="392" width="1200" height="78" fill="#20132c"/>
+      <rect y="388" width="1200" height="5" fill="#6a4c80" opacity=".55"/>
+      <g id="panels"></g>
+
+      <!-- ===== Floor ===== -->
+      <rect y="470" width="1200" height="230" fill="url(#gFloor)"/>
+      <g id="planks"></g>
+      <rect y="468" width="1200" height="4" fill="#160b05" opacity=".7"/>
+
+      <!-- ===== Open door with the night outside ===== -->
+      <g clip-path="url(#clipDoor)">
+        <rect x="860" y="160" width="180" height="320" fill="url(#gSky)"/>
+        <g id="stars"></g>
+        <circle cx="1000" cy="214" r="26" fill="#fff3c4" opacity=".1"/>
+        <circle cx="1000" cy="214" r="12" fill="#fff6d6"/>
+        <g id="skyFx"></g>
+        <path d="M860 470 L860 400 L885 400 L885 385 L905 385 L905 410 L925 410 L925 372 L950 372 L950 358 L958 358 L958 372 L975 372 L975 395 L995 395 L995 380 L1020 380 L1020 402 L1040 402 L1040 470 Z" fill="#150d2e"/>
+        <g id="cityWin"></g>
+        <g id="cityLights"></g>
+        <rect x="860" y="456" width="180" height="16" fill="#1d1333"/>
+      </g>
+      <path d="M870 470 L870 250 A80 80 0 0 1 1030 250 L1030 470" fill="none" stroke="#4a2814" stroke-width="16"/>
+      <path d="M861 470 L861 250 A89 89 0 0 1 1039 250 L1039 470" fill="none" stroke="#c9973f" stroke-width="2" opacity=".8"/>
+      <path d="M861 252 L861 472 L821 500 L821 236 Z" fill="url(#gLeafL)" stroke="#2a1408" stroke-width="2"/>
+      <path d="M855 272 L855 358 L828 368 L828 266 Z" fill="none" stroke="#8a5328" stroke-width="2"/>
+      <path d="M855 380 L855 458 L828 474 L828 388 Z" fill="none" stroke="#8a5328" stroke-width="2"/>
+      <circle cx="830" cy="376" r="3" fill="#e2b65a"/>
+      <path d="M1039 252 L1039 472 L1079 500 L1079 236 Z" fill="url(#gLeafR)" stroke="#2a1408" stroke-width="2"/>
+      <path d="M1045 272 L1045 358 L1072 368 L1072 266 Z" fill="none" stroke="#8a5328" stroke-width="2"/>
+      <path d="M1045 380 L1045 458 L1072 474 L1072 388 Z" fill="none" stroke="#8a5328" stroke-width="2"/>
+      <circle cx="1070" cy="376" r="3" fill="#e2b65a"/>
+      <path d="M852 470 L1048 470 L1058 484 L842 484 Z" fill="#5d4a3c"/>
+      <g id="toran"></g>
+
+      <!-- ===== Wall decor ===== -->
+      <!-- A child's crayon drawing, framed -->
+      <g transform="translate(470 150)">
+        <rect width="110" height="140" rx="3" fill="#5a3216"/>
+        <rect x="5" y="5" width="100" height="130" fill="none" stroke="#c9973f" stroke-width="1.5"/>
+        <rect x="10" y="10" width="90" height="120" fill="#fbf4e4"/>
+        <g fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="80" cy="31" r="8" stroke="#f2a71b" stroke-width="2.6"/>
+          <path d="M80 17 v4 M80 41 v4 M66 31 h4 M90 31 h4 M70 21 l3 3 M87 38 l3 3 M90 21 l-3 3 M73 38 l-3 3" stroke="#f2a71b" stroke-width="2"/>
+          <path d="M20 26 q4 -3 8 0 q4 -3 8 0 M38 40 q3 -2 6 0 q3 -2 6 0" stroke="#8fb8e8" stroke-width="2"/>
+          <path d="M22 108 V84 L40 68 L58 84 V108" stroke="#d6453d" stroke-width="2.6"/>
+          <path d="M35 108 V95 h10 V108" stroke="#7a4a2a" stroke-width="2.2"/>
+          <path d="M26 88 h7 v7 h-7 z" stroke="#4a8ad6" stroke-width="2"/>
+          <path d="M14 116 q3 -6 6 0 q3 -6 6 0 q3 -6 6 0 q3 -6 6 0 q3 -6 6 0 q3 -6 6 0 q3 -6 6 0 q3 -6 6 0 q3 -6 6 0 q3 -6 6 0 q3 -6 6 0 q3 -6 6 0 q3 -6 6 0" stroke="#4caf50" stroke-width="2"/>
+          <circle cx="70" cy="80" r="4.5" stroke="#5b3a29" stroke-width="2"/>
+          <path d="M70 85 V100 M70 100 l-4 9 M70 100 l4 9 M70 89 l-6 5 M70 89 L78 95" stroke="#5b3a29" stroke-width="2"/>
+          <circle cx="85" cy="88" r="3.8" stroke="#5b3a29" stroke-width="2"/>
+          <path d="M85 92 l-5 11 h10 z" stroke="#e2407a" stroke-width="2"/>
+          <path d="M82 103 v6 M88 103 v6 M80 95 L78 95" stroke="#5b3a29" stroke-width="2"/>
+        </g>
+        <path d="M60 52 c-3 -4 -9 -1 -6 4 l6 6 l6 -6 c3 -5 -3 -8 -6 -4 z" fill="#e2407a"/>
+      </g>
+      <!-- Her advocate's gown, hanging on the wall -->
+      <g>
+        <path d="M656 178 Q694 164 732 178 L756 346 Q694 362 634 346 Z" fill="#000" opacity=".35" filter="url(#fSoft)" transform="translate(6 6)"/>
+        <circle cx="690" cy="140" r="5.5" fill="url(#gBrass)" stroke="#7c5218" stroke-width="1"/>
+        <path d="M690 144 q0 8 -5 11 q-4 3 0 6" stroke="#c9973f" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+        <path d="M648 176 L690 158 L732 176" stroke="#6b3a1a" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M651 174 Q690 160 729 174 L749 334 Q690 350 631 334 Z" fill="#17121f"/>
+        <path d="M653 177 Q632 226 636 312 L651 314 Q648 240 664 194 Z" fill="#0e0a14"/>
+        <path d="M727 177 Q748 226 744 312 L729 314 Q732 240 716 194 Z" fill="#0e0a14"/>
+        <g fill="none" stroke-linecap="round">
+          <path d="M675 196 Q670 262 664 340" stroke="#2c2438" stroke-width="2"/>
+          <path d="M705 196 Q710 262 716 340" stroke="#2c2438" stroke-width="2"/>
+          <path d="M690 214 V346" stroke="#0b0810" stroke-width="2"/>
+          <path d="M660 186 Q654 250 650 330" stroke="#3a3048" stroke-width="1.4" opacity=".7"/>
+          <path d="M720 186 Q726 250 730 330" stroke="#3a3048" stroke-width="1.4" opacity=".7"/>
+          <path d="M675 167 L690 212 L705 167" stroke="#3a3048" stroke-width="2.2"/>
+        </g>
+        <rect x="684.5" y="170" width="5" height="25" rx="1" fill="#f4f1ea"/>
+        <rect x="690.5" y="170" width="5" height="25" rx="1" fill="#f4f1ea"/>
+        <path d="M684.5 170 h11" stroke="#d9d4c8" stroke-width="1.4"/>
+      </g>
+      <g transform="translate(430 250)">
+        <rect x="-4" y="-6" width="8" height="24" rx="2" fill="#a5782e"/>
+        <path d="M0 8 Q 12 8 13 -6" stroke="#d9a441" stroke-width="2.5" fill="none"/>
+        <path d="M3 -28 L23 -28 L27 -8 L-1 -8 Z" fill="#f6dca0" stroke="#c9973f"/>
+      </g>
+      <g transform="translate(792 250)">
+        <rect x="-4" y="-6" width="8" height="24" rx="2" fill="#a5782e"/>
+        <path d="M0 8 Q 12 8 13 -6" stroke="#d9a441" stroke-width="2.5" fill="none"/>
+        <path d="M3 -28 L23 -28 L27 -8 L-1 -8 Z" fill="#f6dca0" stroke="#c9973f"/>
+      </g>
+      <!-- Akash kandil (star lantern) -->
+      <line x1="1132" y1="0" x2="1132" y2="114" stroke="#caa36a" stroke-width="1.2"/>
+      <g transform="translate(1132 150)">
+        <g id="kandilTails">
+          <path d="M-21 29 L-24 80" stroke="#e8a33c" stroke-width="3"/>
+          <path d="M0 15 L0 86" stroke="#d81b60" stroke-width="3"/>
+          <path d="M21 29 L24 80" stroke="#e8a33c" stroke-width="3"/>
+          <path d="M-10 22 L-12 74" stroke="#2e7d32" stroke-width="2.5"/>
+          <path d="M10 22 L12 74" stroke="#2e7d32" stroke-width="2.5"/>
+        </g>
+        <path id="kandilStar" d="M0 -36 L8.8 -12.1 L34.2 -11.1 L14.3 4.6 L21.2 29.1 L0 15 L-21.2 29.1 L-14.3 4.6 L-34.2 -11.1 L-8.8 -12.1 Z" fill="#7a2f17" stroke="#e8a33c" stroke-width="1.5"/>
+        <circle id="kandilCore" r="9" fill="#ffcf6b" opacity=".2"/>
+      </g>
+
+      <!-- Tall brass nilavilakku (lit in the finale) -->
+      <g>
+        <ellipse cx="95" cy="594" rx="44" ry="8" fill="#000" opacity=".4" filter="url(#fSoft)"/>
+        <path d="M56 592 Q56 566 82 558 L108 558 Q134 566 134 592 Z" fill="url(#gBrass)" stroke="#7c5218" stroke-width="1"/>
+        <ellipse cx="95" cy="592" rx="39" ry="5" fill="#b8862b"/>
+        <path d="M66 578 Q95 570 124 578" stroke="#7c5218" stroke-width="1.2" fill="none" opacity=".6"/>
+        <rect x="90" y="330" width="10" height="230" fill="url(#gBrass)"/>
+        <ellipse cx="95" cy="556" rx="14" ry="5" fill="url(#gBrass)"/>
+        <ellipse cx="95" cy="512" rx="11" ry="8" fill="url(#gBrass)"/>
+        <ellipse cx="95" cy="452" rx="9" ry="6" fill="url(#gBrass)"/>
+        <ellipse cx="95" cy="392" rx="10" ry="7" fill="url(#gBrass)"/>
+        <ellipse cx="95" cy="350" rx="8" ry="5" fill="url(#gBrass)"/>
+        <path d="M56 326 Q95 356 134 326 Z" fill="url(#gBrass)" stroke="#7c5218" stroke-width="1"/>
+        <ellipse cx="95" cy="326" rx="39" ry="6" fill="#e8bd62"/>
+        <ellipse cx="95" cy="326" rx="32" ry="4" fill="#5a3a0e"/>
+        <path d="M91 324 L91 302 Q95 292 99 302 L99 324 Z" fill="url(#gBrass)"/>
+        <path d="M95 268 C 86 280 88 292 95 298 C 102 292 104 280 95 268 Z" fill="url(#gBrass)" stroke="#7c5218" stroke-width="1"/>
+        <g stroke="#3a2a1a" stroke-width="1.6" stroke-linecap="round"><path d="M64 323 l-3 -4"/><path d="M78 325 l-1 -4"/><path d="M112 325 l1 -4"/><path d="M126 323 l3 -4"/></g>
+      </g>
+
+      <!-- Rug -->
+      <ellipse cx="560" cy="642" rx="232" ry="44" fill="#5c1624"/>
+      <ellipse cx="560" cy="642" rx="220" ry="39" fill="none" stroke="#e0a03a" stroke-width="3" stroke-dasharray="8 6"/>
+      <ellipse cx="560" cy="642" rx="200" ry="33" fill="#7d2234"/>
+      <ellipse cx="560" cy="642" rx="120" ry="20" fill="none" stroke="#e0a03a" stroke-width="2"/>
+      <ellipse cx="560" cy="642" rx="60" ry="10" fill="#1d3f6e"/>
+
+      <!-- Rangoli at the doorstep -->
+      <g id="rangoli" transform="translate(950 534) scale(1 .26)"></g>
+
+      <!-- Side table with sweets -->
+      <ellipse cx="270" cy="594" rx="125" ry="15" fill="#000" opacity=".35" filter="url(#fSoft)"/>
+      <path d="M190 452 C 180 500 198 540 182 588" stroke="#3a1a0a" stroke-width="9" fill="none" stroke-linecap="round"/>
+      <path d="M350 452 C 360 500 342 540 358 588" stroke="#3a1a0a" stroke-width="9" fill="none" stroke-linecap="round"/>
+      <path d="M270 458 C 264 510 276 550 270 596" stroke="#3a1a0a" stroke-width="9" fill="none" stroke-linecap="round"/>
+      <ellipse cx="270" cy="548" rx="92" ry="13" fill="#4a2611"/>
+      <rect x="212" y="520" width="11" height="28" fill="#2e5d8a"/>
+      <rect x="224" y="524" width="9" height="24" fill="#8a2e2e"/>
+      <rect x="234" y="518" width="12" height="30" fill="#c9973f"/>
+      <rect x="247" y="526" width="8" height="22" fill="#3d6b3d"/>
+      <path d="M158 440 A112 18 0 0 0 382 440 L382 451 A112 18 0 0 1 158 451 Z" fill="#3e1f0d"/>
+      <ellipse cx="270" cy="440" rx="112" ry="18" fill="url(#gWood)"/>
+      <ellipse cx="270" cy="440" rx="100" ry="14" fill="none" stroke="#a8622e" stroke-width="1" opacity=".5"/>
+      <!-- A plate of ladoos -->
+      <ellipse cx="194" cy="437" rx="33" ry="7" fill="url(#gBrass)" stroke="#7c5218" stroke-width="1"/>
+      <ellipse cx="194" cy="435" rx="26" ry="4.5" fill="#c9973f"/>
+      <g fill="#f2a33a" stroke="#c4741c" stroke-width="1">
+        <circle cx="179" cy="428" r="7.5"/><circle cx="194" cy="429" r="7.5"/><circle cx="209" cy="428" r="7.5"/>
+        <circle cx="186.5" cy="417" r="7.5"/><circle cx="201.5" cy="417" r="7.5"/><circle cx="194" cy="406" r="7.5"/>
+      </g>
+      <g fill="#fff3c0" opacity=".7"><circle cx="177" cy="425" r="1.4"/><circle cx="192" cy="426" r="1.4"/><circle cx="207" cy="425" r="1.4"/><circle cx="184.5" cy="414" r="1.4"/><circle cx="199.5" cy="414" r="1.4"/><circle cx="192" cy="403" r="1.4"/></g>
+
+      <!-- Pouffe -->
+      <ellipse cx="560" cy="630" rx="72" ry="12" fill="#000" opacity=".35" filter="url(#fSoft)"/>
+      <path d="M496 558 L496 612 Q 560 634 624 612 L624 558 Z" fill="url(#gPouffe)"/>
+      <path d="M498 592 L510 582 L522 592 L534 582 L546 592 L558 582 L570 592 L582 582 L594 592 L606 582 L618 592" stroke="#f4c25b" stroke-width="2" fill="none"/>
+      <circle cx="510" cy="602" r="2.4" fill="#dfe7ef"/><circle cx="534" cy="605" r="2.4" fill="#dfe7ef"/><circle cx="558" cy="606" r="2.4" fill="#dfe7ef"/><circle cx="582" cy="605" r="2.4" fill="#dfe7ef"/><circle cx="606" cy="602" r="2.4" fill="#dfe7ef"/>
+      <ellipse cx="560" cy="558" rx="64" ry="15" fill="#2a9a91"/>
+      <ellipse cx="560" cy="558" rx="55" ry="11" fill="none" stroke="#f4c25b" stroke-width="1.2" stroke-dasharray="3 3"/>
+
+      <!-- ===== Night-time dimming, then light sources ===== -->
+      <rect id="dark" x="-20" y="-20" width="1240" height="740" fill="#0a0517" opacity=".42" pointer-events="none"/>
+      <g id="glows" pointer-events="none">
+        <ellipse id="doorHaze" cx="950" cy="330" rx="130" ry="170" fill="url(#gGlow)" opacity=".12"/>
+        <ellipse id="doorSpill" cx="950" cy="500" rx="200" ry="48" fill="url(#gDoorSpill)" opacity=".7"/>
+        <circle id="sg1" cx="443" cy="232" r="78" fill="url(#gGlow)" opacity=".25"/>
+        <circle id="sg2" cx="805" cy="232" r="78" fill="url(#gGlow)" opacity=".25"/>
+        <circle id="kandilGlow" cx="1132" cy="150" r="120" fill="url(#gGlow)" opacity="0"/>
+        <ellipse cx="290" cy="370" rx="170" ry="200" fill="url(#gSpot)"/>
+        <ellipse id="spotGirl" cx="560" cy="520" rx="200" ry="240" fill="url(#gSpot)"/>
+        <g id="vFlames" opacity="0">
+          <circle cx="95" cy="312" r="95" fill="url(#gGlow)" opacity=".8"/>
+          <path class="vf" d="M0 0 C -4.5 -5 -4 -12 0 -20 C 4 -12 4.5 -5 0 0 Z" fill="url(#gFlame)" transform="translate(61 319)"/>
+          <path class="vf" d="M0 0 C -4.5 -5 -4 -12 0 -20 C 4 -12 4.5 -5 0 0 Z" fill="url(#gFlame)" transform="translate(77 321)"/>
+          <path class="vf" d="M0 0 C -4.5 -5 -4 -12 0 -20 C 4 -12 4.5 -5 0 0 Z" fill="url(#gFlame)" transform="translate(113 321)"/>
+          <path class="vf" d="M0 0 C -4.5 -5 -4 -12 0 -20 C 4 -12 4.5 -5 0 0 Z" fill="url(#gFlame)" transform="translate(129 319)"/>
+        </g>
+      </g>
+
+      <!-- ===== Vintage gramophone ===== -->
+      <g id="gramo" class="clickable">
+        <rect x="200" y="196" width="196" height="250" fill="transparent"/>
+        <rect x="227" y="437" width="10" height="5" fill="#b8862b"/><rect x="333" y="437" width="10" height="5" fill="#b8862b"/>
+        <rect x="225" y="392" width="120" height="46" fill="url(#gCab)" stroke="#2a1408" stroke-width="1.5"/>
+        <rect x="236" y="400" width="98" height="30" fill="none" stroke="#9a6a32" stroke-width="1.5"/>
+        <path d="M225 392 l9 0 l-9 9 z M345 392 l-9 0 l9 9 z M225 438 l9 0 l-9 -9 z M345 438 l-9 0 l9 -9 z" fill="#d9a441"/>
+        <circle cx="285" cy="415" r="4" fill="#d9a441"/>
+        <path d="M225 392 L345 392 L333 362 L237 362 Z" fill="#6b3a1a" stroke="#2a1408" stroke-width="1.2"/>
+        <ellipse cx="285" cy="377.5" rx="47" ry="12.5" fill="#3b0f12"/>
+        <g transform="translate(285 377) scale(1 .27)">
+          <g id="recordSpin">
+            <circle r="44" fill="#121212"/>
+            <circle r="40" fill="none" stroke="#2e2e2e" stroke-width="1.4"/>
+            <circle r="35" fill="none" stroke="#2e2e2e" stroke-width="1.4"/>
+            <circle r="30" fill="none" stroke="#2e2e2e" stroke-width="1.4"/>
+            <circle r="24" fill="none" stroke="#2e2e2e" stroke-width="1.4"/>
+            <path d="M0 0 L44 -8 A44 44 0 0 1 41 16 Z" fill="#fff" opacity=".1"/>
+            <path d="M0 0 L-44 8 A44 44 0 0 1 -41 -16 Z" fill="#fff" opacity=".1"/>
+            <circle r="13" fill="#b3262b"/>
+            <circle r="9" fill="none" stroke="#f4c25b" stroke-width="1"/>
+            <rect x="4" y="-2" width="6" height="4" fill="#f4c25b"/>
+            <circle r="2.2" fill="#e8e8e8"/>
+          </g>
+        </g>
+        <path d="M244 366 Q 246 354 260 347" stroke="#c9973f" stroke-width="8" fill="none" stroke-linecap="round"/>
+        <path d="M258 346 C 252 310 262 250 289.4 217.2 L 360.6 318.8 C 322 332 288 344 266 349 Z" fill="url(#gBrass)" stroke="#8a5c1a" stroke-width="1"/>
+        <path d="M262 347 Q 268 290 300 228" stroke="#8a5c1a" stroke-width="1" fill="none" opacity=".5"/>
+        <path d="M263 347 Q 286 300 326 250" stroke="#8a5c1a" stroke-width="1" fill="none" opacity=".5"/>
+        <path d="M264 348 Q 300 320 346 292" stroke="#8a5c1a" stroke-width="1" fill="none" opacity=".5"/>
+        <ellipse cx="325" cy="268" rx="30" ry="62" transform="rotate(-35 325 268)" fill="url(#gHornIn)" stroke="#f6d27a" stroke-width="3"/>
+        <ellipse cx="336" cy="366" rx="6" ry="3" fill="#b8862b"/>
+        <g id="toneArm" transform="translate(336 365) rotate(-28)">
+          <path d="M0 0 C -6 2 -14 6 -26 12 L -31 14" stroke="#e8be62" stroke-width="3.2" fill="none" stroke-linecap="round"/>
+          <path d="M-35 12 l7 -2 l2 5 l-7 2 z" fill="#8a5c1a"/>
+        </g>
+        <path d="M345 409 h12 v15" stroke="#d9a441" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <circle cx="357" cy="426" r="3.4" fill="#3a1a0a"/>
+      </g>
+
+      <g id="girl"></g>
+      <g id="diyas"></g>
+      <g id="cloud" class="clickable"></g>
+      <g id="notes" pointer-events="none"></g>
+      <g id="petals" pointer-events="none"></g>
+      <g id="hint" pointer-events="none">
+        <ellipse class="pulse" cx="290" cy="318" rx="112" ry="142" fill="none" stroke="#ffd36b" stroke-width="2.5" stroke-dasharray="6 8"/>
+        <text class="pulse" x="292" y="166" text-anchor="middle" font-family="Poppins, sans-serif" font-size="18" font-weight="600" fill="#ffe2a6">tap the gramophone ♪</text>
+      </g>
+      <rect x="-20" y="-20" width="1240" height="740" fill="url(#gVig)" pointer-events="none"/>
+    </svg>
+
+    <div id="intro">
+      <div class="diya-ico">🪔</div>
+      <div class="big">A little something<br>for <span id="nameIntro">Counselor</span></div>
+      <button class="btn" id="openBtn">Step inside ✨</button>
+      <div class="small">Turn your sound on 🔊</div>
+    </div>
+  </div>
+
+  <p id="caption" class="hide"></p>
+
+  <div class="controls">
+    <button class="btn ghost" id="playBtn">▶ Play music</button>
+    <button class="btn ghost" id="replayBtn" hidden>↺ Watch again</button>
+  </div>
+  <section id="np" aria-label="Now playing">
+    <div class="np-inner">
+      <div class="np-label"><span class="np-dot pulse"></span>Now playing on the gramophone</div>
+      <div class="np-title">Magale <span>· Sai Abhyankkar &amp; Harini</span></div>
+      <div class="np-frame"><div id="ytPlayer"></div></div>
+    </div>
+  </section>
+
+  <section id="letter">
+    <h2>Happy Diwali, <span id="nameL">Abhiii</span> 🪔</h2>
+    <div id="letterText"></div>
+    <div id="sign"></div>
+  </section>
+
+  <footer>Made with love, just for you.</footer>
+</div>
+
+<script>
+(() => {
+/* ================= PERSONALIZE HERE ================= */
+const NAME = "Abhiii";          // shown on top, in the letter and in the last line
+const INTRO_NAME = "Counselor"; // shown on the opening screen: "A little something for …"
+const FROM = "";                // your name for the signature, or leave "" for "— with love"
+const LETTER =
+`I know things have felt a little heavy lately.
+
+Maybe that little girl felt a bit like you —
+sitting quietly while the whole world outside was glowing.
+
+But one song, one dance, and a few small steps towards the light,
+and she found her smile again.
+
+I hope you find yours too.
+You deserve every bit of light this Diwali brings —
+calm days, silly laughter, and everything your heart is quietly hoping for.`;
+const DANCE_SECONDS = 30;      // how long she dances before walking to the door
+const YOUTUBE_URL = "https://www.youtube.com/watch?v=FhhA5purigQ";  // official "Magale" music video (Think Music India)
+const SONG_START = 0;          // seconds into the video to start from, e.g. 20 to skip an intro
+/* ==================================================== */
+
+const $ = id => document.getElementById(id);
+const NS = "http://www.w3.org/2000/svg";
+const lerp = (a, b, t) => a + (b - a) * t;
+const clamp = (v, a = 0, b = 1) => Math.max(a, Math.min(b, v));
+const smooth = t => t * t * (3 - 2 * t);
+const f1 = v => v.toFixed(1);
+function el(tag, attrs, parent) {
+  const e = document.createElementNS(NS, tag);
+  for (const k in attrs) e.setAttribute(k, attrs[k]);
+  if (parent) parent.appendChild(e);
+  return e;
+}
+
+document.title = `Happy Diwali, ${NAME} ✨`;
+["nameH", "nameL"].forEach(id => $(id).textContent = NAME);
+$("nameIntro").textContent = INTRO_NAME;
+
+const N = {
+  intro:  "“Everyone is laughing outside… so why does my heart feel so heavy tonight?”",
+  hint:   "Maybe a little music would help… tap the gramophone ♪",
+  cloud:  "“Go away, little rain cloud. I don't want to be sad on Diwali.” ☁️",
+  playF:  "“This song… it feels like someone is holding my hand.” ♪",
+  playS:  "“This tune… it feels like a warm hug.” ♪",
+  listen: "“My feet want to move… just a little.”",
+  rise:   "“Okay… just one dance.”",
+  dance:  "“I'm dancing! I forgot how light I can feel.”",
+  smile:  "“There it is… my smile came back.” ✨",
+  lighter:"“Every twirl makes the heavy feeling smaller and smaller.”",
+  toDoor: "“Wait… it's Diwali! The diyas are still waiting for me!”",
+  atDoor: "Tap the diyas to light them with her 🪔",
+  notYet: "Not yet… first, let's bring back her smile 🙂",
+  paused: "Paused. Tap the gramophone to continue ♪",
+  finale: `“I'm not sad anymore.” Happy Diwali, ${NAME} ✨`
+};
+
+/* ================= Static decor ================= */
+const panels = $("panels");
+for (let x = 14; x < 1200; x += 118) el("rect", { x, y: 402, width: 100, height: 58, rx: 3, fill: "none", stroke: "#3a2850", "stroke-width": 2 }, panels);
+const planks = $("planks");
+for (let i = -14; i <= 14; i++) el("line", { x1: 600 + i * 52, y1: 470, x2: 600 + i * 52 * 2.3, y2: 700, stroke: "#1c0e06", "stroke-width": 1.3, opacity: .55 }, planks);
+[490, 516, 552, 600, 662].forEach((y, k) => {
+  for (let i = 0; i < 12; i++) {
+    const x = (i * 113 + k * 47) % 1200;
+    el("line", { x1: x, y1: y, x2: x + 40 + k * 8, y2: y, stroke: "#1c0e06", "stroke-width": 1, opacity: .35 }, planks);
+  }
+});
+
+const starEls = [];
+for (let i = 0; i < 46; i++) {
+  const c = el("circle", { cx: f1(872 + Math.random() * 156), cy: f1(178 + Math.random() * 220), r: (Math.random() * 1.1 + .4).toFixed(2), fill: "#fff" }, $("stars"));
+  starEls.push({ c, ph: Math.random() * 6.28, sp: 1 + Math.random() * 2 });
+}
+[[860,400,25],[885,385,20],[905,410,20],[925,372,25],[958,372,17],[975,395,20],[995,380,25],[1020,402,20]].forEach(([x, y, w]) => {
+  for (let r = 0; r < 3; r++) for (let c = 0; c < 2; c++) {
+    const lit = Math.random() < .55;
+    el("rect", { x: x + 5 + c * (w / 2 - 2), y: y + 9 + r * 14, width: 3.5, height: 5, fill: lit ? "#ffd27a" : "#2a2050", opacity: lit ? .85 : 1 }, $("cityWin"));
+  }
+});
+const cityDots = [];
+const LC = ["#ff5d8f", "#ffd36b", "#7ad0ff", "#9cff8a"];
+for (let i = 0; i <= 22; i++) {
+  const t = i / 22, x = (1 - t) * (1 - t) * 862 + 2 * (1 - t) * t * 950 + t * t * 1038, y = (1 - t) * (1 - t) * 398 + 2 * (1 - t) * t * 416 + t * t * 396;
+  cityDots.push({ c: el("circle", { cx: f1(x), cy: f1(y), r: 1.6, fill: LC[i % 4] }, $("cityLights")), ph: i });
+}
+
+// Toran (marigold garland) over the door
+const toran = $("toran");
+const P0 = [842, 164], P1 = [950, 184], P2 = [1058, 164];
+const qb = t => [(1-t)*(1-t)*P0[0] + 2*(1-t)*t*P1[0] + t*t*P2[0], (1-t)*(1-t)*P0[1] + 2*(1-t)*t*P1[1] + t*t*P2[1]];
+el("path", { d: `M${P0} Q${P1} ${P2}`, stroke: "#7a4a1a", "stroke-width": 1.5, fill: "none" }, toran);
+[.12, .31, .5, .69, .88].forEach((t, k) => {
+  const [x, y] = qb(t);
+  el("line", { x1: f1(x), y1: f1(y), x2: f1(x), y2: f1(y + 36), stroke: "#7a4a1a", "stroke-width": 1 }, toran);
+  for (let j = 1; j <= 3; j++) el("circle", { cx: f1(x), cy: f1(y + j * 10.5), r: 5, fill: (j + k) % 2 ? "#ff8c1a" : "#ffc21a" }, toran);
+  el("ellipse", { cx: f1(x), cy: f1(y + 46), rx: 3.4, ry: 8, fill: "#2f7d32" }, toran);
+});
+for (let i = 0; i <= 20; i++) {
+  const [x, y] = qb(i / 20);
+  el("circle", { cx: f1(x), cy: f1(y), r: 6, fill: i % 2 ? "#ff8c1a" : "#ffc21a" }, toran);
+  el("circle", { cx: f1(x - 1.6), cy: f1(y - 1.8), r: 1.6, fill: "#fff3c0", opacity: .7 }, toran);
+}
+
+// Rangoli
+const rg = $("rangoli");
+el("circle", { r: 72, fill: "#c2185b" }, rg);
+el("circle", { r: 62, fill: "#ffb300" }, rg);
+for (let k = 0; k < 16; k++) el("ellipse", { cx: 0, cy: -42, rx: 8, ry: 17, fill: k % 2 ? "#fff7e0" : "#2e7d32", transform: `rotate(${k * 22.5})` }, rg);
+el("circle", { r: 28, fill: "#1565c0" }, rg);
+el("circle", { r: 20, fill: "#ff7043" }, rg);
+el("circle", { r: 10, fill: "#fff7e0" }, rg);
+for (let k = 0; k < 24; k++) el("circle", { cx: f1(67 * Math.cos(k * Math.PI / 12)), cy: f1(67 * Math.sin(k * Math.PI / 12)), r: 2.4, fill: "#fff" }, rg);
+
+/* ================= Diyas ================= */
+const diyas = [];
+[160, 125, 90, 55, 20].forEach((deg, i) => {
+  const a = deg * Math.PI / 180, x = 950 + 96 * Math.cos(a), y = 536 + 22 * Math.sin(a);
+  const g = el("g", { transform: `translate(${f1(x)} ${f1(y)}) scale(.95)`, class: "clickable" }, $("diyas"));
+  g.innerHTML = `
+    <ellipse class="floorGlow" cx="8" cy="2" rx="60" ry="16" fill="url(#gGlow)" opacity="0" pointer-events="none"/>
+    <ellipse cx="0" cy="5" rx="22" ry="5" fill="#000" opacity=".3" pointer-events="none"/>
+    <g class="dHint" opacity="0" pointer-events="none"><ellipse class="pulse" cx="2" cy="1" rx="28" ry="10" fill="none" stroke="#ffd36b" stroke-width="2"/></g>
+    <path d="M-18 -2 Q -16 10 0 11 Q 16 10 18 -2 Q 0 4 -18 -2 Z" fill="url(#gClay)"/>
+    <path d="M14 -3 Q 24 -6 27 -10 Q 21 -2 16 1 Z" fill="#b8582a"/>
+    <path d="M-18 -2 Q 0 -6 18 -2 Q 0 4 -18 -2 Z" fill="#e08a4a"/>
+    <ellipse cx="0" cy="-1.4" rx="13" ry="2.3" fill="#5a2a0a"/>
+    <circle cx="-10" cy="5" r="1" fill="#ffd36b"/><circle cx="-5" cy="6.5" r="1" fill="#ffd36b"/><circle cx="0" cy="7" r="1" fill="#ffd36b"/><circle cx="5" cy="6.5" r="1" fill="#ffd36b"/><circle cx="10" cy="5" r="1" fill="#ffd36b"/>
+    <line x1="23" y1="-8" x2="25" y2="-12" stroke="#3a2a1a" stroke-width="1.5"/>
+    <g class="flame" transform="translate(25 -11) scale(0)" pointer-events="none">
+      <circle cx="0" cy="-10" r="20" fill="url(#gGlow)"/>
+      <path d="M0 0 C -5 -6 -4.5 -14 0 -23 C 4.5 -14 5 -6 0 0 Z" fill="url(#gFlame)"/>
+    </g>
+    <rect x="-20" y="-40" width="44" height="54" fill="transparent"/>`;
+  const d = { g, flame: g.querySelector(".flame"), glow: g.querySelector(".floorGlow"), hint: g.querySelector(".dHint"), lit: false, litT: 0 };
+  g.addEventListener("click", () => lightDiya(d));
+  diyas.push(d);
+});
+
+/* ================= The girl ================= */
+const SKIN = "#c68a62";
+const armMarkup = side => `
+  <line x1="0" y1="0" x2="0" y2="46" stroke="${SKIN}" stroke-width="13" stroke-linecap="round"/>
+  <path d="M-9 -4 Q0 -10 9 -4 L8 14 Q0 17 -8 14 Z" fill="#e9a92f" stroke="#a8701a" stroke-width="1"/>
+  <g id="g_fore${side}">
+    <line x1="0" y1="0" x2="0" y2="42" stroke="${SKIN}" stroke-width="11.5" stroke-linecap="round"/>
+    <line x1="-7" y1="32" x2="7" y2="32" stroke="#f4c25b" stroke-width="2.6" stroke-linecap="round"/>
+    <line x1="-7" y1="36.5" x2="7" y2="36.5" stroke="#d81b60" stroke-width="2.6" stroke-linecap="round"/>
+    <line x1="-7" y1="41" x2="7" y2="41" stroke="#f4c25b" stroke-width="2.6" stroke-linecap="round"/>
+    <ellipse cx="0" cy="49" rx="6.5" ry="7.5" fill="${SKIN}"/>
+  </g>`;
+const jhumka = `<line x1="0" y1="0" x2="0" y2="5" stroke="#f4c25b" stroke-width="1.2"/><path d="M-4.5 10 Q0 3 4.5 10 L5 13 Q0 15 -5 13 Z" fill="#f4c25b"/><circle cx="0" cy="15.5" r="1.3" fill="#f4c25b"/>`;
+const foot = `<ellipse cx="0" cy="-3" rx="10" ry="4.6" fill="#e3a93c"/><path d="M-6 -6.5 Q0 -9.5 6 -6.5" stroke="#e8e8f0" stroke-width="1.4" fill="none"/>`;
+$("girl").innerHTML = `
+<ellipse id="g_shadow" cx="0" cy="0" rx="62" ry="11" fill="#000" opacity=".38" filter="url(#fSoft)"/>
+<path id="g_dupTail" fill="#ff8a4c" opacity=".8" stroke="#ffd36b" stroke-width="1.2"/>
+<g id="g_headBack"><path id="g_hairBack" fill="#1b1212"/></g>
+<g id="g_footL">${foot}</g>
+<g id="g_footR">${foot}</g>
+<path id="g_skirt" fill="url(#gSkirt)"/>
+<path id="g_skirtDots" fill="url(#pSkirt)" opacity=".55"/>
+<path id="g_pleats" fill="none" stroke="#7c0f3a" stroke-width="1.6" opacity=".45"/>
+<path id="g_hem" fill="none" stroke="#f4c25b" stroke-width="7" stroke-linecap="round"/>
+<path id="g_hem2" fill="none" stroke="#fff0b8" stroke-width="1.4" opacity=".8"/>
+<g id="g_torso">
+  <rect x="-7" y="-94" width="14" height="24" rx="5" fill="${SKIN}"/>
+  <ellipse cx="0" cy="-70" rx="15" ry="9" fill="${SKIN}"/>
+  <path d="M-17 0 C -20 -22 -31 -44 -29 -70 Q -20 -78 -12 -77 Q 0 -60 12 -77 Q 20 -78 29 -70 C 31 -44 20 -22 17 0 Z" fill="#e9a92f" stroke="#a8701a" stroke-width="1.2"/>
+  <path d="M-12 -76 Q0 -59 12 -76" fill="none" stroke="#fff0b8" stroke-width="1.6" stroke-dasharray="1 3" stroke-linecap="round"/>
+  <rect x="-18" y="-7" width="36" height="7" rx="2" fill="#b77d14"/>
+  <path d="M-10 -74 Q0 -63 10 -74" fill="none" stroke="#ffd36b" stroke-width="2"/>
+  <circle cx="0" cy="-64.5" r="2.6" fill="#c2185b" stroke="#ffd36b" stroke-width="1"/>
+  <path d="M-31 -74 C -12 -58 8 -30 22 4 L 12 8 C 0 -24 -18 -50 -36 -64 Z" fill="#ff8a4c" opacity=".72"/>
+  <path d="M-31 -74 C -12 -58 8 -30 22 4" fill="none" stroke="#ffd36b" stroke-width="1.3" stroke-dasharray="2 2"/>
+</g>
+<g id="g_armL">${armMarkup("L")}</g>
+<g id="g_armR">${armMarkup("R")}</g>
+<g id="g_headFront">
+  <g id="g_jhL" transform="translate(-23 -20)">${jhumka}</g>
+  <g id="g_jhR" transform="translate(23 -20)">${jhumka}</g>
+  <ellipse cx="-23" cy="-24" rx="3.6" ry="6" fill="${SKIN}"/>
+  <ellipse cx="23" cy="-24" rx="3.6" ry="6" fill="${SKIN}"/>
+  <ellipse cx="0" cy="-26" rx="22.5" ry="27" fill="${SKIN}"/>
+  <path d="M-22 -22 Q -20 -2 0 1 Q 20 -2 22 -22 Q 20 -6 0 -2 Q -20 -6 -22 -22 Z" fill="#a86e4a" opacity=".28"/>
+  <path d="M-25 -20 C -28 -46 -14 -56 0 -55 C 14 -56 28 -46 25 -20 C 22 -34 13 -43 2 -45 L0 -41 L-2 -45 C -13 -43 -22 -34 -25 -20 Z" fill="#1b1212"/>
+  <path d="M-25 -22 C -27 -8 -25 2 -21 8 L -18 6 C -21 -4 -22 -12 -21 -24 Z" fill="#1b1212"/>
+  <path d="M25 -22 C 27 -8 25 2 21 8 L 18 6 C 21 -4 22 -12 21 -24 Z" fill="#1b1212"/>
+  <g fill="#fffaf0" stroke="#e6e0d0" stroke-width=".6">
+    <circle cx="18" cy="-50" r="2.6"/><circle cx="22.5" cy="-46" r="2.6"/><circle cx="25.5" cy="-41" r="2.6"/><circle cx="27" cy="-36" r="2.6"/><circle cx="27.5" cy="-31" r="2.6"/>
+  </g>
+  <line x1="0" y1="-45" x2="0" y2="-41" stroke="#f4c25b" stroke-width="1"/>
+  <circle cx="0" cy="-39" r="2.6" fill="#f4c25b"/><circle cx="0" cy="-39" r="1.2" fill="#d81b60"/>
+  <g id="g_feat">
+    <circle cx="0" cy="-33" r="1.5" fill="#d81b60"/>
+    <path id="g_browL" stroke="#1b1212" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+    <path id="g_browR" stroke="#1b1212" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+    <g id="g_eyesOpen">
+      <ellipse cx="-9" cy="-25" rx="3" ry="3.8" fill="#1b1212"/><circle cx="-8" cy="-26.3" r="1" fill="#fff"/>
+      <path d="M-13.5 -27.5 Q -9 -30.5 -4.5 -27.5" stroke="#1b1212" stroke-width="1.5" fill="none"/>
+      <ellipse cx="9" cy="-25" rx="3" ry="3.8" fill="#1b1212"/><circle cx="10" cy="-26.3" r="1" fill="#fff"/>
+      <path d="M4.5 -27.5 Q 9 -30.5 13.5 -27.5" stroke="#1b1212" stroke-width="1.5" fill="none"/>
+    </g>
+    <g id="g_eyesSad" stroke="#1b1212" stroke-width="1.8" fill="none" stroke-linecap="round">
+      <path d="M-13 -24 Q -9 -21 -5 -24"/><path d="M5 -24 Q 9 -21 13 -24"/>
+    </g>
+    <g id="g_eyesHappy" stroke="#1b1212" stroke-width="2" fill="none" stroke-linecap="round">
+      <path d="M-13 -23 Q -9 -28 -5 -23"/><path d="M5 -23 Q 9 -28 13 -23"/>
+    </g>
+    <path d="M0.5 -21 Q -2 -15 1.5 -14" stroke="#9a6040" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+    <circle cx="3.4" cy="-14.6" r="1.6" fill="none" stroke="#f4c25b" stroke-width=".9"/>
+    <ellipse id="g_blushL" cx="-14" cy="-15" rx="5" ry="2.8" fill="#ff6f8a" opacity="0"/>
+    <ellipse id="g_blushR" cx="14" cy="-15" rx="5" ry="2.8" fill="#ff6f8a" opacity="0"/>
+    <path id="g_mouth" stroke="#8a2a35" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <g id="g_mouthOpen" opacity="0">
+      <path d="M-8.5 -10 Q0 1 8.5 -10 Q0 -6.5 -8.5 -10 Z" fill="#8a2a35"/>
+      <path d="M-6.5 -9.3 Q0 -6.6 6.5 -9.3 Q0 -4.8 -6.5 -9.3 Z" fill="#fff"/>
+    </g>
+    <path id="g_tear" d="M0 0 C 2 3 2.4 5.4 0 6.6 C -2.4 5.4 -2 3 0 0 Z" fill="#cfeaff" opacity="0"/>
+  </g>
+</g>`;
+const G = {};
+["shadow","dupTail","headBack","hairBack","footL","footR","skirt","skirtDots","pleats","hem","hem2","torso","armL","armR","foreL","foreR",
+ "headFront","jhL","jhR","feat","browL","browR","eyesOpen","eyesSad","eyesHappy","blushL","blushR","mouth","mouthOpen","tear"].forEach(k => G[k] = $("g_" + k));
+G.root = $("girl");
+
+// Rain cloud over her head
+$("cloud").innerHTML = `
+  <g id="cloudInner">
+    <g id="drops" stroke="#9fc3ff" stroke-width="2" stroke-linecap="round">
+      <line x1="-22" x2="-22" y1="10" y2="17"/><line x1="-10" x2="-10" y1="10" y2="17"/><line x1="2" x2="2" y1="10" y2="17"/><line x1="14" x2="14" y1="10" y2="17"/><line x1="24" x2="24" y1="10" y2="17"/>
+    </g>
+    <path d="M-34 6 C -46 6 -48 -12 -34 -13 C -34 -30 -12 -34 -5 -21 C 1 -36 28 -34 27 -16 C 42 -17 44 4 30 6 Z" fill="#6f6c8c"/>
+    <path d="M-30 -8 C -28 -22 -12 -26 -6 -16 C 2 -28 22 -26 22 -14 C 10 -20 0 -12 -6 -10 C -14 -18 -24 -14 -30 -8 Z" fill="#8a87aa" opacity=".7"/>
+    <rect x="-50" y="-40" width="100" height="60" fill="transparent"/>
+  </g>`;
+const dropEls = [...$("drops").children];
+const vFlameEls = [...document.querySelectorAll("#vFlames .vf")];
+vFlameEls.forEach(f => f.dataset.base = f.getAttribute("transform"));
+
+/* ================= Poses ================= */
+const STAND = { sit:0, x:0, b:0, lean:0, aL:10, eL:8, aR:10, eR:8, tilt:0, down:0, droop:0, flare:0, fL:0, fR:0, hs:0 };
+const SAD    = { ...STAND, sit:1, aL:8, eL:56, aR:8, eR:56, tilt:-7, down:1, droop:1 };
+const LISTEN = { ...SAD, down:.2, droop:.2, tilt:0, eL:50, eR:50 };
+const NAMASTE= { ...STAND, aL:20, eL:130, aR:20, eR:130, tilt:4 };
+const ARMSOUT= { aL:95, eL:5, aR:95, eR:5, flare:.3 };
+// Graceful dance, one keyframe per beat
+const DANCE = [
+  { x:-12, lean:-5, hs:-8, aL:120, eL:-10, aR:40, eR:60, tilt:-8, fR:5 },
+  { aL:80, eL:20, aR:80, eR:20 },
+  { x:12, lean:5, hs:8, aR:120, eR:-10, aL:40, eL:60, tilt:8, fL:5 },
+  { aL:80, eL:20, aR:80, eR:20, b:4 },
+  { x:-8, hs:-10, lean:-4, aL:75, eL:-75, aR:75, eR:-75, tilt:-6, fR:6, b:3 },
+  { x:8, hs:10, lean:4, aL:75, eL:-75, aR:75, eR:-75, tilt:6, fL:6 },
+  { x:-8, hs:-10, lean:-4, aL:75, eL:-75, aR:75, eR:-75, tilt:-6, fR:6, b:3 },
+  { ...ARMSOUT, flare:.2, turn:1 },
+  { aL:165, eL:-30, aR:165, eR:-30, b:-4, flare:.25 },
+  { aL:150, eL:-20, aR:150, eR:-20, b:4, x:-6, hs:-6, tilt:-5 },
+  { aL:165, eL:-30, aR:165, eR:-30, b:-4, x:6, hs:6, tilt:5 },
+  { aL:120, eL:10, aR:120, eR:10, b:2 },
+  { aL:20, eL:128, aR:20, eR:128, tilt:6, b:2 },
+  { aL:20, eL:128, aR:20, eR:128, tilt:-6, x:-4 },
+  { aL:100, eL:0, aR:100, eR:0, b:-3, flare:.15 },
+  { ...ARMSOUT, turn:1 }
+];
+const FINALE_KF = [ { ...ARMSOUT, turn:1 }, { ...ARMSOUT, turn:1 }, { aL:165, eL:-30, aR:165, eR:-30, b:-8 }, NAMASTE ];
+function lerpPose(a, b, t) { const o = {}; for (const k in STAND) o[k] = a[k] + (b[k] - a[k]) * t; return o; }
+function kfPose(list, beats, loop) {
+  const n = list.length;
+  let i = Math.floor(beats); const fr = beats - i;
+  if (!loop && i >= n - 1) return { pose: { ...STAND, ...list[n - 1] }, spin: 0 };
+  i = ((i % n) + n) % n;
+  const A = { ...STAND, ...list[i] }, B = { ...STAND, ...list[(i + 1) % n] }, e = smooth(fr);
+  const pose = lerpPose(A, B, e); let spin = 0;
+  if (list[i].turn) { spin = e; pose.flare += .65 * Math.sin(Math.PI * fr); }
+  return { pose, spin };
+}
+
+/* ================= Rendering the girl ================= */
+const SEAT = { x:560, y:640 }, DOORSPOT = { x:836, y:524 };
+let gx = SEAT.x, gy = SEAT.y, danceW = 0, T = 0;
+const scaleAt = y => .72 + (y - DOORSPOT.y) / (SEAT.y - DOORSPOT.y) * .23;
+
+function renderGirl(p, sx) {
+  const s = p.sit, sc = scaleAt(gy);
+  const waistY = lerp(-152, -92, s) + p.b;
+  const hipY = lerp(-118, -74, s) + p.b * .7;
+  const hipW = lerp(34, 50, s) + 6 * p.flare;
+  const hemY = lerp(-8, -5, s) - 26 * p.flare + p.b * .2;
+  const hemW = lerp(58, 64, s) + 40 * p.flare;
+  const wx = p.x, hx = p.x + p.hs * .5, mx = p.x * .6 + p.hs, mid = hipY + (hemY - hipY) * .45;
+
+  G.root.setAttribute("transform", `translate(${f1(gx)} ${f1(gy)}) scale(${(sc * sx).toFixed(3)} ${sc.toFixed(3)})`);
+  G.shadow.setAttribute("rx", f1(62 + p.flare * 30));
+
+  const sk = `M${f1(wx-17)} ${f1(waistY)} C${f1(wx-21)} ${f1(waistY+10)} ${f1(hx-hipW-2)} ${f1(hipY-12)} ${f1(hx-hipW)} ${f1(hipY)} ` +
+    `C${f1(hx-hipW-3)} ${f1(mid)} ${f1(mx-hemW+6)} ${f1(hemY-16)} ${f1(mx-hemW)} ${f1(hemY)} ` +
+    `Q${f1(mx-hemW*.5)} ${f1(hemY+9)} ${f1(mx)} ${f1(hemY+8)} Q${f1(mx+hemW*.5)} ${f1(hemY+9)} ${f1(mx+hemW)} ${f1(hemY)} ` +
+    `C${f1(mx+hemW-6)} ${f1(hemY-16)} ${f1(hx+hipW+3)} ${f1(mid)} ${f1(hx+hipW)} ${f1(hipY)} ` +
+    `C${f1(hx+hipW+2)} ${f1(hipY-12)} ${f1(wx+21)} ${f1(waistY+10)} ${f1(wx+17)} ${f1(waistY)} Z`;
+  G.skirt.setAttribute("d", sk);
+  G.skirtDots.setAttribute("d", sk);
+  const hemD = dy => `M${f1(mx-hemW+1)} ${f1(hemY+dy)} Q${f1(mx-hemW*.5)} ${f1(hemY+9+dy)} ${f1(mx)} ${f1(hemY+8+dy)} Q${f1(mx+hemW*.5)} ${f1(hemY+9+dy)} ${f1(mx+hemW-1)} ${f1(hemY+dy)}`;
+  G.hem.setAttribute("d", hemD(-1));
+  G.hem2.setAttribute("d", hemD(-7));
+  let pl = "";
+  for (const k of [-.66, -.33, 0, .33, .66]) pl += `M${f1(wx + k * 13)} ${f1(waistY + 6)} Q${f1(hx + k * hipW)} ${f1(hipY + 10)} ${f1(mx + k * hemW * .95)} ${f1(hemY + 6 - Math.abs(k) * 3)} `;
+  G.pleats.setAttribute("d", pl);
+
+  G.footL.setAttribute("transform", `translate(${f1(lerp(-11, -17, s) + p.x * .5)} ${f1(-p.fL)})`);
+  G.footR.setAttribute("transform", `translate(${f1(lerp(11, 17, s) + p.x * .5)} ${f1(-p.fR)})`);
+
+  const torsoT = `translate(${f1(p.x)} ${f1(waistY)}) rotate(${f1(p.lean)})`;
+  const shY = -72 + p.droop * 4;
+  G.torso.setAttribute("transform", torsoT);
+  G.armL.setAttribute("transform", `${torsoT} translate(-29 ${f1(shY)}) rotate(${f1(p.aL)})`);
+  G.foreL.setAttribute("transform", `translate(0 46) rotate(${f1(-p.eL)})`);
+  G.armR.setAttribute("transform", `${torsoT} translate(29 ${f1(shY)}) rotate(${f1(-p.aR)})`);
+  G.foreR.setAttribute("transform", `translate(0 46) rotate(${f1(p.eR)})`);
+  const headT = `${torsoT} translate(0 ${f1(-88 + p.down * 5)}) rotate(${f1(p.tilt)})`;
+  G.headBack.setAttribute("transform", headT);
+  G.headFront.setAttribute("transform", headT);
+  G.feat.setAttribute("transform", `translate(0 ${f1(p.down * 4.5)})`);
+
+  const sw = -p.x * .25 - p.tilt * .3 + Math.sin(T * 2.2) * 2 * danceW;
+  G.hairBack.setAttribute("d", `M-25 -40 C -36 -14 -34 24 ${f1(-27 + sw)} 62 C ${f1(-18 + sw)} 70 ${f1(18 + sw)} 70 ${f1(27 + sw)} 62 C 34 24 36 -14 25 -40 Z`);
+  const js = -p.tilt * 1.2 + Math.sin(T * 5) * 9 * danceW;
+  G.jhL.setAttribute("transform", `translate(-23 -20) rotate(${f1(js)})`);
+  G.jhR.setAttribute("transform", `translate(23 -20) rotate(${f1(js)})`);
+
+  // dupatta tail from the left shoulder
+  const r = p.lean * Math.PI / 180, lx = -29, ly = shY;
+  const Sx = p.x + lx * Math.cos(r) - ly * Math.sin(r), Sy = waistY + lx * Math.sin(r) + ly * Math.cos(r);
+  const fl = Math.sin(T * 3) * 6 * danceW - 26 * p.flare;
+  const len = lerp(150, 140, s);
+  G.dupTail.setAttribute("d", `M${f1(Sx)} ${f1(Sy)} C ${f1(Sx-14)} ${f1(Sy+40)} ${f1(Sx-22+fl)} ${f1(Sy+90)} ${f1(Sx-16+fl*1.4)} ${f1(Sy+len)} L ${f1(Sx-1+fl*1.4)} ${f1(Sy+len)} C ${f1(Sx-7+fl)} ${f1(Sy+90)} ${f1(Sx-2)} ${f1(Sy+40)} ${f1(Sx+8)} ${f1(Sy+4)} Z`);
+
+  return { headX: gx + sc * sx * p.x, headY: gy + sc * (waistY - 114 + p.down * 5), sc };
+}
+
+const BROW = { sad:[-14,-30,-10,-31.5,-5,-34], neu:[-14,-31,-9.5,-33.5,-5,-32], hap:[-14,-31.5,-10,-35,-5,-32.5] };
+let blinkT = 3;
+function renderFace(h, dt, dancingish) {
+  const m = h < .25 ? -1 + h / .25 : (h - .25) / .75;
+  const B = BROW.neu.map((v, i) => m < 0 ? lerp(v, BROW.sad[i], -m) : lerp(v, BROW.hap[i], m));
+  G.browL.setAttribute("d", `M${f1(B[0])} ${f1(B[1])} Q${f1(B[2])} ${f1(B[3])} ${f1(B[4])} ${f1(B[5])}`);
+  G.browR.setAttribute("d", `M${f1(-B[0])} ${f1(B[1])} Q${f1(-B[2])} ${f1(B[3])} ${f1(-B[4])} ${f1(B[5])}`);
+
+  blinkT -= dt; if (blinkT < -.13) blinkT = 2.4 + Math.random() * 2.6;
+  let mode = "open";
+  if (h < .12) mode = "sad";
+  else if (blinkT < 0) mode = "sad";
+  else if (dancingish && h > .7 && Math.sin(T * .9) > .15) mode = "happy";
+  G.eyesOpen.setAttribute("opacity", mode === "open" ? 1 : 0);
+  G.eyesSad.setAttribute("opacity", mode === "sad" ? 1 : 0);
+  G.eyesHappy.setAttribute("opacity", mode === "happy" ? 1 : 0);
+
+  const sm = clamp(-1 + 2.2 * h, -1, 1);
+  const cy = -9 + (sm < 0 ? 2.5 * -sm : -sm), ctl = -9 + (sm < 0 ? -3.5 * -sm : 8 * sm), cx = 6 + 2 * Math.max(0, sm);
+  G.mouth.setAttribute("d", `M${f1(-cx)} ${f1(cy)} Q0 ${f1(ctl)} ${f1(cx)} ${f1(cy)}`);
+  const open = dancingish ? clamp((sm - .85) / .15) : 0;
+  G.mouth.setAttribute("opacity", f1(1 - open));
+  G.mouthOpen.setAttribute("opacity", f1(open));
+  G.blushL.setAttribute("opacity", (.55 * h).toFixed(2));
+  G.blushR.setAttribute("opacity", (.55 * h).toFixed(2));
+  const tc = (T % 3.2) / 3.2;
+  G.tear.setAttribute("transform", `translate(-12 ${f1(-22 + tc * 14)})`);
+  G.tear.setAttribute("opacity", h < .1 ? (Math.sin(Math.PI * tc) * .9).toFixed(2) : 0);
+}
+
+/* ================= Audio: an original, gentle melody ================= */
+const BPM = 80, BEAT = 60 / BPM, EIGHTH = BEAT / 2;
+let AC = null, master, musicBus, sfxBus, noiseBuf, drone = null, seqTimer = null, nextT = 0, step = 0;
+function initAudio() {
+  if (AC) { if (AC.state === "suspended") AC.resume(); return; }
+  try { AC = new (window.AudioContext || window.webkitAudioContext)(); } catch (e) { AC = null; return; }
+  const comp = AC.createDynamicsCompressor(); comp.connect(AC.destination);
+  master = AC.createGain(); master.gain.value = .8; master.connect(comp);
+  musicBus = AC.createGain(); musicBus.gain.value = 0; musicBus.connect(master);
+  const delay = AC.createDelay(1), fb = AC.createGain(), wet = AC.createGain();
+  delay.delayTime.value = EIGHTH * 1.5; fb.gain.value = .25; wet.gain.value = .2;
+  musicBus.connect(delay); delay.connect(fb); fb.connect(delay); delay.connect(wet); wet.connect(master);
+  sfxBus = AC.createGain(); sfxBus.gain.value = .7; sfxBus.connect(master);
+  noiseBuf = AC.createBuffer(1, AC.sampleRate, AC.sampleRate);
+  const d = noiseBuf.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+  if (AC.state === "suspended") AC.resume();
+}
+const nf = s => 261.63 * Math.pow(2, s / 12);
+const MEL = [[4,2],[7,2],[9,2],[7,2], [4,1],[2,1],[0,2],[2,2],[4,2], [7,2],[9,2],[12,3],[9,1], [7,6],[null,2],
+             [9,2],[12,2],[14,2],[12,2], [9,1],[7,1],[4,2],[7,2],[9,2], [7,2],[4,2],[2,2],[4,1],[2,1], [0,6],[null,2]];
+const melSteps = new Array(64).fill(null);
+{ let pos = 0; for (const [n, d] of MEL) { if (n !== null) melSteps[pos] = [n, d]; pos += d; } }
+const ROOTS = [0, 7, 5, 0, 5, 0, 7, 0];
+function env(g, t, peak, end) { g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(peak, t + .008); g.gain.exponentialRampToValueAtTime(.0001, end); }
+function pluck(t, f, dur, vol) {
+  const o1 = AC.createOscillator(), o2 = AC.createOscillator(), g = AC.createGain(), g2 = AC.createGain(), lp = AC.createBiquadFilter();
+  o1.type = "triangle"; o1.frequency.value = f; o2.type = "sine"; o2.frequency.value = f * 2; g2.gain.value = .35;
+  lp.type = "lowpass"; lp.frequency.value = 3200;
+  o1.connect(g); o2.connect(g2); g2.connect(g); g.connect(lp); lp.connect(musicBus);
+  const end = t + Math.min(1.8, dur * 2.2 + .3);
+  env(g, t, vol, end); o1.start(t); o2.start(t); o1.stop(end + .05); o2.stop(end + .05);
+}
+function flute(t, f, dur, vol) {
+  const o = AC.createOscillator(), g = AC.createGain(), lfo = AC.createOscillator(), lg = AC.createGain();
+  o.type = "sine"; o.frequency.value = f; lfo.frequency.value = 5.2; lg.gain.value = f * .006;
+  lfo.connect(lg); lg.connect(o.frequency);
+  g.gain.setValueAtTime(.0001, t); g.gain.linearRampToValueAtTime(vol, t + .12);
+  g.gain.setValueAtTime(vol, t + dur * .8); g.gain.linearRampToValueAtTime(.0001, t + dur + .15);
+  o.connect(g); g.connect(musicBus); o.start(t); lfo.start(t); o.stop(t + dur + .2); lfo.stop(t + dur + .2);
+}
+function bass(t, f, vol) { const o = AC.createOscillator(), g = AC.createGain(); o.type = "sine"; o.frequency.value = f; env(g, t, vol, t + .9); o.connect(g); g.connect(musicBus); o.start(t); o.stop(t + 1); }
+function noise(t, type, freq, vol, dur, bus) {
+  const s = AC.createBufferSource(), fl = AC.createBiquadFilter(), g = AC.createGain();
+  s.buffer = noiseBuf; fl.type = type; fl.frequency.value = freq; env(g, t, vol, t + dur);
+  s.connect(fl); fl.connect(g); g.connect(bus || musicBus); s.start(t); s.stop(t + dur + .02);
+}
+function drum(t, kind) {
+  if (kind === "dha") {
+    const o = AC.createOscillator(), g = AC.createGain();
+    o.frequency.setValueAtTime(140, t); o.frequency.exponentialRampToValueAtTime(58, t + .22);
+    env(g, t, .3, t + .3); o.connect(g); g.connect(musicBus); o.start(t); o.stop(t + .32);
+    noise(t, "lowpass", 500, .06, .07);
+  } else if (kind === "na") {
+    const o = AC.createOscillator(), g = AC.createGain(); o.type = "triangle"; o.frequency.value = 660;
+    env(g, t, .06, t + .14); o.connect(g); g.connect(musicBus); o.start(t); o.stop(t + .16);
+    noise(t, "bandpass", 3000, .045, .05);
+  } else noise(t, "highpass", 7000, .025, .045);
+}
+let percOn = false;
+function schedule(st, t) {
+  const bar = Math.floor(st / 8), e = st % 8, m = melSteps[st];
+  if (m) { pluck(t, nf(m[0]), m[1] * EIGHTH, .2); if (percOn) flute(t, nf(m[0]), m[1] * EIGHTH, .03); }
+  const r = ROOTS[bar];
+  if (e === 0 || e === 4) bass(t, 65.41 * Math.pow(2, r / 12), .2);
+  if (percOn) {
+    if (e % 2 === 1) pluck(t, nf(r + [0, 4, 7, 12][(e - 1) / 2] - 12), EIGHTH, .045);
+    if (e === 0 || e === 4) drum(t, "dha");
+    if (e === 2 || e === 6) drum(t, "na");
+    if (e % 2 === 1) drum(t, "sh");
+  }
+}
+function tick() { while (nextT < AC.currentTime + .15) { schedule(step, nextT); nextT += EIGHTH; step = (step + 1) % 64; } }
+function droneStart() {
+  if (drone) return;
+  const g = AC.createGain(), lp = AC.createBiquadFilter();
+  g.gain.setValueAtTime(0, AC.currentTime); g.gain.linearRampToValueAtTime(.026, AC.currentTime + 1.5);
+  lp.type = "lowpass"; lp.frequency.value = 520; lp.connect(g); g.connect(musicBus);
+  const os = [130.81, 196.0, 261.63].map((fr, i) => { const o = AC.createOscillator(); o.type = "sawtooth"; o.frequency.value = fr; o.detune.value = (i - 1) * 4; o.connect(lp); o.start(); return o; });
+  drone = { g, os };
+}
+function droneStop() {
+  if (!drone) return;
+  const { g, os } = drone, t = AC.currentTime;
+  g.gain.cancelScheduledValues(t); g.gain.setValueAtTime(g.gain.value, t); g.gain.linearRampToValueAtTime(0, t + .3);
+  os.forEach(o => o.stop(t + .35)); drone = null;
+}
+function synthStart() {
+  initAudio(); if (!AC) return false;
+  const t = AC.currentTime;
+  musicBus.gain.cancelScheduledValues(t); musicBus.gain.setValueAtTime(musicBus.gain.value, t); musicBus.gain.linearRampToValueAtTime(.9, t + .4);
+  droneStart(); nextT = t + .08; clearInterval(seqTimer); seqTimer = setInterval(tick, 25); tick();
+  return true;
+}
+function synthStop() {
+  clearInterval(seqTimer); seqTimer = null; if (!AC) return;
+  const t = AC.currentTime;
+  musicBus.gain.cancelScheduledValues(t); musicBus.gain.setValueAtTime(musicBus.gain.value, t); musicBus.gain.linearRampToValueAtTime(0, t + .25);
+  droneStop();
+}
+function sfxChime() {
+  if (!AC || AC.state !== "running") return;
+  const t = AC.currentTime;
+  [1318.5, 1975.5, 2637].forEach((fr, i) => {
+    const o = AC.createOscillator(), g = AC.createGain(); o.type = "sine"; o.frequency.value = fr;
+    env(g, t + i * .04, .09 / (i + 1), t + i * .04 + 1.4); o.connect(g); g.connect(sfxBus); o.start(t + i * .04); o.stop(t + 1.6);
+  });
+}
+function sfxPop() { if (AC && AC.state === "running") noise(AC.currentTime, "bandpass", 900 + Math.random() * 900, .22, .5, sfxBus); }
+
+/* ================= Story state ================= */
+let state = "intro", stateT = 0, playing = false, everPlayed = false;
+let h = 0, hBonus = 0, cloudGone = false, cloudOp = 1, cloudPuff = 0;
+let danceClock = 0, reactT = 0, litCount = 0, walkFrom = { x: gx, y: gy };
+let cur = { ...SAD }, recordAng = 0, armAng = -28, camX = 430, darkOp = .42, noteT = 0, fwT = 0, petalT = 0;
+const said = new Set();
+const once = (k, fn) => { if (!said.has(k)) { said.add(k); fn(); } };
+const WALK_DUR = 5.2;
+
+function setState(s) {
+  state = s; stateT = 0;
+  if (s === "toDoor") walkFrom = { x: gx, y: gy };
+  if (s === "finale") { $("replayBtn").hidden = false; narrate(N.finale); }
+}
+
+let capTimer = null;
+function narrate(txt) {
+  const c = $("caption"); c.classList.add("hide"); clearTimeout(capTimer);
+  capTimer = setTimeout(() => { c.textContent = txt; c.classList.remove("hide"); }, 380);
+}
+
+/* ---------- Music: the official video on YouTube; a gentle tune if YouTube can't load ---------- */
+const npBox = $("np");
+function ytIdFrom(u) {
+  const m = String(u).match(/(?:youtu\.be\/|[?&]v=|\/embed\/|\/shorts\/|\/live\/)([\w-]{11})/);
+  return m ? m[1] : (/^[\w-]{11}$/.test(u) ? u : null);
+}
+const YT_ID = ytIdFrom(YOUTUBE_URL);
+let yt = null, ytReady = false, ytFailed = !YT_ID, wantPlay = false, ytEnded = false, watchdog = null;
+
+function setPlaying(v) { playing = v; if (v) everPlayed = true; updatePlayBtn(); }
+function updatePlayBtn() { $("playBtn").textContent = playing ? "⏸ Pause music" : "▶ Play music"; }
+
+function startStory(msg) {
+  if (state === "sad") { setState("listening"); narrate(msg); }
+}
+
+function synthPlay(msg) {
+  const ok = synthStart();
+  setPlaying(true);
+  if (state === "sad") { setState("listening"); }
+  narrate(ok ? (msg || N.playS) : "Sound isn't available here, but the story goes on ✨");
+}
+
+function ytFail(reason) {
+  if (ytFailed) return;
+  if (reason === "timeout" && ytReady) return;
+  ytFailed = true;
+  npBox.classList.remove("show");
+  clearTimeout(watchdog);
+  if (wantPlay) { wantPlay = false; synthPlay("The song couldn't load here, so here's a gentle tune instead ♪"); }
+}
+
+if (YT_ID) {
+  window.onYouTubeIframeAPIReady = () => {
+    try {
+      yt = new YT.Player("ytPlayer", {
+        videoId: YT_ID,
+        playerVars: { start: SONG_START, playsinline: 1, rel: 0, modestbranding: 1 },
+        events: {
+          onReady: () => { ytReady = true; if (wantPlay) ytPlay(); },
+          onStateChange: e => ytState(e.data),
+          onError: () => ytFail("error")
+        }
+      });
+    } catch (err) { ytFail("error"); }
+  };
+  const s = document.createElement("script");
+  s.src = "https://www.youtube.com/iframe_api";
+  s.onerror = () => ytFail("blocked");
+  document.head.appendChild(s);
+  setTimeout(() => ytFail("timeout"), 20000);
+}
+
+function ytPlay() {
+  wantPlay = true;
+  npBox.classList.add("show");
+  if (!ytReady) { narrate("Winding up the gramophone… ♪"); return; }
+  try {
+    if (ytEnded) { yt.seekTo(SONG_START, true); ytEnded = false; }
+    yt.playVideo();
+  } catch (e) { ytFail("error"); return; }
+  clearTimeout(watchdog);
+  // Some phones (mostly iPhones) only start a video when it is tapped directly
+  watchdog = setTimeout(() => {
+    if (wantPlay && !playing) {
+      narrate("Tap ▶ on the little player below to start the song 🎵");
+      npBox.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+  }, 3500);
+}
+
+function ytState(s) {
+  if (s === 1) {                       // playing (from the gramophone or the player's own button)
+    wantPlay = false; clearTimeout(watchdog);
+    npBox.classList.add("show");
+    const resumed = everPlayed && state !== "sad";
+    setPlaying(true);
+    startStory(N.playF);
+    if (resumed && (state === "listening" || state === "dancing")) narrate("The music plays on… ♪");
+  } else if (s === 2) {                // paused
+    if (playing) { setPlaying(false); if (state === "listening" || state === "dancing") narrate(N.paused); }
+  } else if (s === 0) {                // song finished
+    ytEnded = true; setPlaying(false);
+    if (["listening", "rising", "dancing"].includes(state)) { setState("toDoor"); narrate(N.toDoor); }
+  }
+}
+
+function togglePlay() {
+  if (state === "intro") return;
+  initAudio();
+  if (playing || wantPlay) { pauseMusic(); return; }
+  if (!ytFailed) ytPlay(); else synthPlay();
+}
+function pauseMusic() {
+  wantPlay = false; clearTimeout(watchdog);
+  if (!ytFailed && ytReady) {
+    try { yt.pauseVideo(); } catch (e) {}
+    if (!playing) updatePlayBtn();
+  } else {
+    synthStop(); setPlaying(false);
+    if (state === "listening" || state === "dancing") narrate(N.paused);
+  }
+}
+$("gramo").addEventListener("click", togglePlay);
+$("playBtn").addEventListener("click", togglePlay);
+$("replayBtn").addEventListener("click", () => location.reload());
+$("cloud").addEventListener("click", () => {
+  if (cloudGone || state === "intro") return;
+  cloudGone = true; cloudPuff = .001; hBonus = .08; narrate(N.cloud); sfxChime();
+});
+
+function lightDiya(d) {
+  if (state !== "atDoor") { if (state !== "finale" && state !== "intro") narrate(N.notYet); return; }
+  if (d.lit) return;
+  d.lit = true; d.litT = 0; litCount++; reactT = .7; sfxChime();
+  const left = 5 - litCount;
+  if (left > 0) narrate(left === 1 ? "Just one more… 🪔" : `${left} more to go… 🪔`);
+  else setTimeout(() => setState("finale"), 900);
+}
+
+$("openBtn").addEventListener("click", () => {
+  initAudio();
+  $("intro").classList.add("gone");
+  setState("sad"); narrate(N.intro);
+  setTimeout(() => { if (!everPlayed && !wantPlay && state === "sad") narrate(N.hint); }, 5200);
+});
+
+/* ================= Effects ================= */
+const notes = [], sparks = [], petals = [];
+function spawnNote() {
+  const t = el("text", { x: 325, y: 265, "font-size": 18 + Math.random() * 10, fill: "#ffe08a", "font-family": "serif" }, $("notes"));
+  t.textContent = Math.random() < .5 ? "♪" : "♫";
+  notes.push({ el: t, x: 322, y: 262, vx: 40 + Math.random() * 40, vy: -18 - Math.random() * 20, life: 0, ph: Math.random() * 6 });
+}
+function spawnFirework() {
+  const cx = 885 + Math.random() * 130, cy = 195 + Math.random() * 130, col = ["#ffd36b", "#ff6f9a", "#8fe3ff", "#b6ff8f", "#ffffff"][Math.floor(Math.random() * 5)];
+  for (let i = 0; i < 22; i++) {
+    const a = i / 22 * Math.PI * 2, sp = 35 + Math.random() * 25;
+    sparks.push({ el: el("circle", { r: 1.8, fill: col }, $("skyFx")), x: cx, y: cy, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, life: 1 });
+  }
+  sfxPop();
+}
+function spawnPetal(x0, x1) {
+  const p = el("ellipse", { rx: 4, ry: 2.4, fill: ["#ff9f1c", "#ffc21a", "#ff6f9a", "#fff3c0"][Math.floor(Math.random() * 4)] }, $("petals"));
+  petals.push({ el: p, x: x0 + Math.random() * (x1 - x0), y: -10, vx: -10 + Math.random() * 20, vy: 50 + Math.random() * 40, rot: Math.random() * 360, vr: -120 + Math.random() * 240, ph: Math.random() * 6 });
+}
+let letterShown = false;
+function showLetter() {
+  if (letterShown) return; letterShown = true;
+  const box = $("letter"); box.classList.add("show");
+  setTimeout(() => box.scrollIntoView({ behavior: "smooth", block: "center" }), 300);
+  const out = $("letterText"); let i = 0;
+  const type = () => {
+    out.textContent = LETTER.slice(0, i++);
+    if (i <= LETTER.length) setTimeout(type, LETTER[i - 2] === "\n" ? 260 : 26);
+    else { $("sign").textContent = FROM ? `— ${FROM}` : "— with love"; $("sign").style.opacity = 1; }
+  };
+  type();
+}
+
+/* ================= Main loop ================= */
+let last = performance.now();
+function frame(now) {
+  const dt = Math.min(.05, (now - last) / 1000); last = now; T += dt;
+  const advance = (state === "listening" || state === "dancing") ? playing : state !== "intro";
+  if (advance) stateT += dt;
+  percOn = ["dancing", "toDoor", "atDoor", "finale"].includes(state);
+
+  let target, spin = 0;
+  switch (state) {
+    case "intro":
+    case "sad":
+      target = { ...SAD, b: Math.sin(T * 1.4) * 1.2, tilt: -7 + Math.sin(T * .7) * 1.5 };
+      h = lerp(h, hBonus, clamp(dt * 1.5));
+      break;
+    case "listening": {
+      const beat = T / BEAT, on = playing ? 1 : 0;
+      target = { ...LISTEN, tilt: Math.sin(beat * Math.PI) * 4 * on, fR: Math.max(0, Math.sin(beat * Math.PI * 2)) * 5 * on, b: -Math.abs(Math.sin(beat * Math.PI)) * 1.5 * on };
+      h = Math.max(h, Math.min(.38, hBonus + stateT / 7 * .38));
+      if (stateT > 3.5) once("listen", () => narrate(N.listen));
+      if (stateT >= 8) { setState("rising"); narrate(N.rise); }
+      break;
+    }
+    case "rising": {
+      target = lerpPose(LISTEN, { ...STAND, aL: 25, eL: 20, aR: 25, eR: 20 }, smooth(clamp(stateT / 1.6)));
+      h = Math.max(h, .4);
+      if (stateT >= 1.6) { setState("dancing"); narrate(N.dance); }
+      break;
+    }
+    case "dancing": {
+      if (playing) danceClock += dt;
+      danceW = lerp(danceW, playing ? 1 : 0, clamp(dt * 4));
+      const d = kfPose(DANCE, danceClock / BEAT, true);
+      target = lerpPose({ ...STAND, b: Math.sin(T * 2), hs: Math.sin(T * 1.3) * 2 }, d.pose, danceW);
+      spin = danceW > .5 ? d.spin : 0;
+      h = Math.max(h, .4 + .6 * clamp(stateT / 10));
+      if (stateT > 9) once("smile", () => narrate(N.smile));
+      if (stateT > 18) once("lighter", () => narrate(N.lighter));
+      if (stateT >= DANCE_SECONDS) { setState("toDoor"); narrate(N.toDoor); }
+      break;
+    }
+    case "toDoor": {
+      const p = clamp(stateT / WALK_DUR), e = smooth(p), ph = stateT * Math.PI * 2 * 1.4;
+      gx = lerp(walkFrom.x, DOORSPOT.x, e); gy = lerp(walkFrom.y, DOORSPOT.y, e);
+      danceW = lerp(danceW, .6, clamp(dt * 3));
+      target = { ...STAND, aL: 30, eL: 14, aR: 30, eR: 14, b: -Math.abs(Math.sin(ph)) * 3, fL: Math.max(0, Math.sin(ph)) * 7, fR: Math.max(0, -Math.sin(ph)) * 7, hs: Math.sin(ph) * 5, tilt: Math.sin(ph) * 3, flare: .1 };
+      if (p > .35 && p < .62) { const q = (p - .35) / .27; spin = smooth(q); target.aL = target.aR = 95; target.eL = target.eR = 5; target.flare = .1 + .7 * Math.sin(Math.PI * q); }
+      h = 1;
+      if (p >= 1) { setState("atDoor"); narrate(N.atDoor); }
+      break;
+    }
+    case "atDoor": {
+      danceW = lerp(danceW, .4, clamp(dt * 3));
+      target = { ...NAMASTE, hs: Math.sin(T * 1.5) * 3, tilt: 4 + Math.sin(T * 1.2) * 3, b: Math.sin(T * 2) };
+      if (reactT > 0) { reactT -= dt; const w = Math.sin(Math.PI * clamp(1 - reactT / .7)); target = lerpPose(target, { ...STAND, aL: 155, eL: -30, aR: 155, eR: -30, b: -10, flare: .25 }, w); }
+      h = 1;
+      break;
+    }
+    case "finale": {
+      danceW = lerp(danceW, 1, clamp(dt * 3));
+      const beats = stateT / BEAT;
+      if (beats < FINALE_KF.length) { const d = kfPose(FINALE_KF, beats, false); target = d.pose; spin = d.spin; }
+      else target = { ...NAMASTE, hs: Math.sin(T * 1.5) * 4, tilt: 4 + Math.sin(T * 1.2) * 4, b: Math.sin(T * 2) * 1.5 };
+      h = 1;
+      fwT -= dt;
+      if (fwT <= 0) { spawnFirework(); fwT = stateT < 12 ? .45 + Math.random() * .5 : 1.8 + Math.random() * 1.5; }
+      if (stateT < 7) { petalT -= dt; if (petalT <= 0) { const vw = viewW(); spawnPetal(camX - vw / 2, camX + vw / 2); petalT = .06; } }
+      if (stateT > 3.2) showLetter();
+      break;
+    }
+  }
+
+  cur = lerpPose(cur, target, 1 - Math.exp(-dt * 9));
+  let sx = Math.cos(spin * Math.PI * 2);
+  sx = Math.sign(sx || 1) * Math.max(.1, Math.abs(sx));
+  const dancingish = ["dancing", "toDoor", "atDoor", "finale"].includes(state);
+  const head = renderGirl(cur, sx);
+  renderFace(h, dt, dancingish);
+  $("spotGirl").setAttribute("cx", f1(gx)); $("spotGirl").setAttribute("cy", f1(gy - 120));
+
+  // cloud
+  const cloudTarget = (state === "intro" || state === "sad") && !cloudGone ? 1 : 0;
+  cloudOp = lerp(cloudOp, cloudTarget, clamp(dt * (cloudPuff ? 6 : 2)));
+  if (cloudPuff) cloudPuff += dt;
+  const cs = head.sc * (1 + cloudPuff * 1.5);
+  $("cloud").setAttribute("transform", `translate(${f1(head.headX + 8)} ${f1(head.headY - 72 * head.sc)}) scale(${cs.toFixed(3)})`);
+  $("cloud").setAttribute("opacity", cloudOp.toFixed(2));
+  $("cloud").style.pointerEvents = cloudOp > .3 ? "auto" : "none";
+  dropEls.forEach((d, i) => { const o = (T * 42 + i * 9) % 22; d.setAttribute("transform", `translate(0 ${f1(o)})`); d.setAttribute("opacity", f1(1 - o / 22)); });
+
+  // gramophone
+  if (playing) recordAng = (recordAng + dt * 200) % 360;
+  $("recordSpin").setAttribute("transform", `rotate(${f1(recordAng)})`);
+  armAng = lerp(armAng, playing ? 0 : -28, clamp(dt * 4));
+  $("toneArm").setAttribute("transform", `translate(336 365) rotate(${f1(armAng)})`);
+  $("hint").setAttribute("opacity", state === "sad" && !everPlayed ? 1 : 0);
+  if (playing) { noteT -= dt; if (noteT <= 0) { spawnNote(); noteT = .55; } }
+  for (let i = notes.length - 1; i >= 0; i--) {
+    const n = notes[i]; n.life += dt; n.x += n.vx * dt; n.y += n.vy * dt + Math.sin(T * 3 + n.ph) * .4;
+    n.el.setAttribute("x", f1(n.x)); n.el.setAttribute("y", f1(n.y));
+    n.el.setAttribute("opacity", f1(Math.min(1, n.life * 3) * Math.max(0, 1 - n.life / 3.2)));
+    if (n.life > 3.2) { n.el.remove(); notes.splice(i, 1); }
+  }
+
+  // diyas
+  diyas.forEach((d, i) => {
+    d.hint.setAttribute("opacity", state === "atDoor" && !d.lit ? 1 : 0);
+    if (!d.lit) return;
+    d.litT += dt;
+    const s = smooth(clamp(d.litT * 2.5)), fy = 1 + .09 * Math.sin(T * 14 + i) + .05 * Math.sin(T * 23 + i * 2);
+    d.flame.setAttribute("transform", `translate(25 -11) scale(${(s * .95).toFixed(3)} ${(s * fy).toFixed(3)}) rotate(${f1(Math.sin(T * 9 + i) * 4)})`);
+    d.glow.setAttribute("opacity", (s * .9).toFixed(2));
+  });
+
+  // room light
+  darkOp = lerp(darkOp, state === "finale" ? .05 : .42 - .16 * h, clamp(dt * 1.2));
+  $("dark").setAttribute("opacity", darkOp.toFixed(3));
+  const sg = state === "finale" ? .85 : .22 + .25 * h;
+  $("sg1").setAttribute("opacity", sg.toFixed(2)); $("sg2").setAttribute("opacity", sg.toFixed(2));
+  $("doorSpill").setAttribute("opacity", (.6 + .4 * litCount / 5).toFixed(2));
+  const kl = state === "finale" ? clamp(stateT / 1.5) : 0;
+  $("kandilGlow").setAttribute("opacity", (kl * (.75 + .1 * Math.sin(T * 3))).toFixed(2));
+  $("kandilStar").setAttribute("fill", kl > .5 ? "#ff7a2a" : "#7a2f17");
+  $("vFlames").setAttribute("opacity", kl.toFixed(2));
+  if (kl > 0) vFlameEls.forEach((f, i) => f.setAttribute("transform",
+    `${f.dataset.base} scale(${(.95 + .05 * Math.sin(T * 11 + i)).toFixed(3)} ${(1 + .1 * Math.sin(T * 14 + i * 2)).toFixed(3)})`));
+  $("kandilCore").setAttribute("opacity", (.2 + kl * .8).toFixed(2));
+
+  starEls.forEach(s => s.c.setAttribute("opacity", (.45 + .55 * Math.abs(Math.sin(T * s.sp + s.ph))).toFixed(2)));
+  cityDots.forEach(d => d.c.setAttribute("opacity", (.4 + .6 * Math.abs(Math.sin(T * 2 + d.ph))).toFixed(2)));
+
+  for (let i = sparks.length - 1; i >= 0; i--) {
+    const p = sparks[i]; p.life -= dt * .9; p.vy += 30 * dt; p.x += p.vx * dt; p.y += p.vy * dt; p.vx *= .985;
+    p.el.setAttribute("cx", f1(p.x)); p.el.setAttribute("cy", f1(p.y)); p.el.setAttribute("opacity", Math.max(0, p.life).toFixed(2));
+    if (p.life <= 0) { p.el.remove(); sparks.splice(i, 1); }
+  }
+  for (let i = petals.length - 1; i >= 0; i--) {
+    const p = petals[i]; p.y += p.vy * dt; p.x += (p.vx + Math.sin(T * 2 + p.ph) * 20) * dt; p.rot += p.vr * dt;
+    p.el.setAttribute("transform", `translate(${f1(p.x)} ${f1(p.y)}) rotate(${f1(p.rot)})`);
+    if (p.y > 720) { p.el.remove(); petals.splice(i, 1); }
+  }
+
+  // camera: on narrow screens, follow the story
+  const vw = viewW();
+  let cx = 430;
+  if (state === "toDoor") cx = gx + 60;
+  if (state === "atDoor" || state === "finale") cx = 1200;
+  cx = clamp(cx, vw / 2, 1200 - vw / 2);
+  camX = lerp(camX, cx, clamp(dt * 2.2));
+  camX = clamp(camX, vw / 2, 1200 - vw / 2);
+  $("scene").setAttribute("viewBox", `${f1(camX - vw / 2)} 0 ${f1(vw)} 700`);
+
+  requestAnimationFrame(frame);
+}
+const stage = $("stage");
+function viewW() { const a = stage.clientWidth / Math.max(1, stage.clientHeight); return clamp(700 * a, 560, 1200); }
+requestAnimationFrame(frame);
+
+// Small hook used for testing each stage of the story
+window.__scene = {
+  go(s, extra) {
+    $("intro").classList.add("gone");
+    if (s === "dancing" || s === "listening") { playing = true; everPlayed = true; }
+    if (s === "atDoor" || s === "finale") { gx = DOORSPOT.x; gy = DOORSPOT.y; h = 1; }
+    if (s === "dancing") h = .7;
+    if (s === "finale") diyas.forEach(d => { d.lit = true; d.litT = 1; });
+    setState(s); if (extra) danceClock = extra;
+  },
+  get state() { return state; }
+};
+})();
+</script>
+</body>
+</html>
